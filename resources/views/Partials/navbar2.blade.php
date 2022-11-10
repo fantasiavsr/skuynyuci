@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg pt-2 pb-3" style="background-color: #F1F3F6">
+<nav class="navbar navbar-expand-lg pt-2 pb-3" style="background-color: #FFFFFF">
     <div class="container">
 
         <a class="navbar-brand mt-2" href="/"><img class="" src="{{ asset('img/brand.png') }}" alt="" width="100%"
