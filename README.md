@@ -1,3 +1,9 @@
+<p align="center"><img src="https://user-images.githubusercontent.com/86558365/201179627-f2b1d304-684d-4d28-a05a-63de5d36069f.png" width="400"></p>
+
+## About SkuyNyuci
+
+SkuyNyuci merupakan sebuah platform penyedia jasa laundry yang menghubungkan konsumen dan penyedia jasa. Desain aplikasi yang simple dan modern agar mudah digunakan oleh masyarakat umum. Serta menghubungkan konsumen dan penyedia jasa laundry.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
