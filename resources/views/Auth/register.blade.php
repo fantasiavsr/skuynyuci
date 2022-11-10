@@ -1,4 +1,5 @@
-@extends('layouts.main')
+@extends('Layouts.main')
+@include('Partials.navbar2')
 
 @section('content')
     <div class="pt-5 pb-5" style="background-color: #F9FAFC">
@@ -11,9 +12,19 @@
         </div>
         <div class="container" style="">
             <div class="row pb-5">
+                <div class="col pt-5 pb-5 px-4 text-dark">
+                    <div class="text-dark">
+                        <h1 class="fw-normal" style="color: #1947BA">Welcome
+                            to SkuyNyuci</h1>
+                            <p>Your productive journey starts right here</p>
+                    </div>
+                    <div class="col-md-7 ps-4 pt-5">
+                        <img class="img-fluid w-100" src="{{ asset('img/login-image1.png') }}" alt="">
+                    </div>
+                </div>
                 <div class="col-md-4 pt-5 pb-5 px-4 rounded text-dark" {{-- style="background-color: #ffffff" --}}>
                     <div class="text-dark">
-                        <h1 class="mb-5 fw-bold" style="color: #4FBEAB">Registrasi</h1>
+                        <h1 class="mb-5 fw-bold" style="color: #1947BA">Registrasi</h1>
                     </div>
 
                     {{-- @if ($errors->any())
@@ -59,12 +70,12 @@
                         {{-- <input type="hidden" id="role" name="role" value="0"> --}}
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-lg mt-4 px-5 mb-4 text-light shadow-custom-green"
-                            style="background-color: #4FBEAB; width: 100%">Register</button>
+                            style="background-color: #1947BA; width: 100%">Register</button>
 
                         <!-- Register buttons -->
                         <div class="text-center">
-                            <p>Already have Account? <a href="#" class=" fw-bold"
-                                    style="color: #4FBEAB">Log In</a>
+                            <p>Already have Account? <a href="{{ route('login') }}" class=" fw-bold"
+                                    style="color: #1947BA">Log In</a>
                             </p>
                         </div>
                     </form>

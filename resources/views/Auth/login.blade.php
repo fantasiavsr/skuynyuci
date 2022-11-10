@@ -15,8 +15,8 @@
                 <div class="col pt-5 pb-5 px-4 text-dark">
                     <div class="text-dark">
                         <h1 class="fw-normal" style="color: #1947BA">Welcome
-                            to SkuyNyuci</h1>
-                            <p>Your productive journey starts right here</p>
+                            Back</h1>
+                            <p>We’re so excited to see you again!</p>
                     </div>
                     <div class="col-md-7 ps-4 pt-5">
                         <img class="img-fluid w-100" src="{{ asset('img/login-image1.png') }}" alt="">
@@ -49,7 +49,7 @@
 
                         <!-- Register buttons -->
                         <div class="text-center">
-                            <p>Not a member? <a href="#" class=" fw-bold"
+                            <p>Not a member? <a href="{{ route('register') }}" class=" fw-bold"
                                     style="color: #1947BA">Register</a>
                             </p>
                         </div>
