@@ -27,7 +27,7 @@
                         <h1 class="mb-5 fw-bold" style="color: #4FBEAB">Login</h1>
                     </div> --}}
 
-                    <form action="#" method="#">
+                    <form action="/login" method="POST">
                         @csrf
 
                         <div class="form-outline mb-4">

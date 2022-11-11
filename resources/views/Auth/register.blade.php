@@ -37,7 +37,7 @@
                         </div>
                     @endif --}}
 
-                    <form action="#" method="#">
+                    <form action="/register" method="POST">
                         @csrf
                         <div class="form-outline mb-4">
                             <label class="form-label">Nama Lengkap</label>
@@ -57,7 +57,7 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label">No Telepon</label>
-                            <input type="text" name="nohp" id="nohp" class="form-control" autofocus required>
+                            <input type="text" name="no_hp" id="nohp" class="form-control" autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">

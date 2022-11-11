@@ -16,24 +16,27 @@ class RegisterController extends Controller
         ]);
     }
 
-    // public function store(Request $request)
-    // {
+    public function store(Request $request)
+    {
 
-    //     $validateData = $request->validate([
-    //         'nama_lengkap' => 'required',
-    //         'username' => 'required',
-    //         'email' => 'required|unique:users,email',
-    //         'nohp' => 'required|unique:users,nohp|numeric',
-    //         'level' => 'required',
-    //         'password' => 'required',
-    //     ]);
+        $validateData = $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => 'required|min:3',
+            'email' => 'required',
+            'no_hp' => 'required|numeric',
+            // 'level' => 'required',
+            'password' => 'required|min:8',
+        ]);
 
-    //     /* $validateData['password'] = bcrypt($validateData['password']); */
-    //     $validateData['password'] = Hash::make($validateData['password']);
+        /* $validateData['password'] = bcrypt($validateData['password']); */
+        $validateData['password'] = Hash::make($validateData['password']);
 
-    //     // $created = User::create($validateData);
+        if ($validateData) {
+            User::create($validateData);
+            return redirect()->route('login')->with('success', 'User Successfully Added');
+        } else {
+            return back()->with('error', 'Some error encountered');
+        }
 
-    //     return redirect()->route('login')
-    //     ->with('success', 'User Successfully Added');
-    // }
+    }
 }

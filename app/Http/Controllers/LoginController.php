@@ -25,7 +25,7 @@ class LoginController extends Controller
         if (Auth::attempt($credential)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('user');
+            return redirect()->intended('/user');
         }
         /* dd('Invalid credentials'); */
         return back()->withErrors([
