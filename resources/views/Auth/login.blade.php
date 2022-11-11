@@ -27,6 +27,16 @@
                         <h1 class="mb-5 fw-bold" style="color: #4FBEAB">Login</h1>
                     </div> --}}
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="/login" method="POST">
                         @csrf
 

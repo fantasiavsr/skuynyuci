@@ -1,7 +1,7 @@
 @extends('Layouts.main')
 
 @section('content')
-    @include('Partials.navbar2')
+    @include('Partials.navbaruser')
 
     <div class="main">
         <div class="text-secondary px-4 py-5 text-center">

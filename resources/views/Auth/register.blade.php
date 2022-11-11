@@ -27,7 +27,7 @@
                         <h1 class="mb-5 fw-bold" style="color: #1947BA">Registrasi</h1>
                     </div>
 
-                    {{-- @if ($errors->any())
+                    @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
@@ -35,7 +35,7 @@
                                 @endforeach
                             </ul>
                         </div>
-                    @endif --}}
+                    @endif
 
                     <form action="/register" method="POST">
                         @csrf
