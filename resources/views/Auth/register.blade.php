@@ -41,7 +41,7 @@
                         @csrf
                         <div class="form-outline mb-4">
                             <label class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control" autofocus
+                            <input type="text" name="name" id="name" class="form-control" autofocus
                                 required>
                         </div>
 
@@ -57,7 +57,7 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label">No Telepon</label>
-                            <input type="text" name="no_hp" id="nohp" class="form-control" autofocus required>
+                            <input type="text" name="phone" id="phone" class="form-control" autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">
@@ -65,7 +65,7 @@
                             <input type="password" name="password" id="password" class="form-control" required>
                         </div>
 
-                        <input type="hidden" name="level" value="User">
+                        <input type="hidden" name="level" value="Customer">
 
                         {{-- <input type="hidden" id="role" name="role" value="0"> --}}
                         <!-- Submit button -->

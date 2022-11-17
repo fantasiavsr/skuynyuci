@@ -20,11 +20,11 @@ class RegisterController extends Controller
     {
 
         $validateData = $request->validate([
-            'nama_lengkap' => 'required',
+            'name' => 'required',
             'username' => 'required|min:3',
             'email' => 'required',
-            'no_hp' => 'required|numeric',
-            // 'level' => 'required',
+            'phone' => 'required|numeric',
+            'level' => 'required',
             'password' => 'required|min:8',
         ]);
 
