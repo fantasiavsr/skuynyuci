@@ -1,0 +1,40 @@
+.shadow-custom {
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.03);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shadow-custom-sm {
+    box-shadow: 0px 16px 40px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shadow-custom-lg {
+    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.15));
+}
+
+.shadow-custom-green {
+    box-shadow: 0px 16px 40px rgba(79, 190, 171, 0.25);
+}
+
+.shadow-custom-alt {
+    box-shadow: 0px 16px 40px rgba(48, 68, 92, 0.25);
+}
+
+.sticky-sidebar {
+    position: sticky;
+    height: 100px;
+    position: sticky;
+    top: 0;
+}
+
+form .form-control::-webkit-input-placeholder {
+    color: #b8b8b8;
+  }
+
+  :-moz-placeholder {
+    color: #b8b8b8 !important;
+  }
+
+  ::-moz-placeholder {
+    color: #b8b8b8 !important;
+  }
