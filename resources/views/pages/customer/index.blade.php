@@ -1,4 +1,4 @@
-@extends('Layouts.main')
+@extends('Layouts.core')
 
 @section('content')
     @include('Partials.navbaruser')
