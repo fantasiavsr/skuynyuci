@@ -154,7 +154,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
+                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
                                             </a>
                                         </div>
                                     </div>

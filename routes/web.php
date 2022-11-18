@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,8 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 /* user page */
 // Route::get('/user', [UserController::class, 'index'])->name('user')->middleware('auth', 'customer', 'admin', 'launderer');
 /* Resource */
-Route::resource('user', UserController::class)->middleware('auth', 'customer', 'admin', 'launderer');
+Route::resource('user', UserController::class)->middleware('auth');
+
+/* Item */
+Route::get('item detail', [ItemController::class, 'index'])->middleware('auth')->name('item.detailtest');
+/* Route::get('item detail/{id}', [ItemController::class, 'index'])->middleware('auth', 'user')->name('item.detail'); */
