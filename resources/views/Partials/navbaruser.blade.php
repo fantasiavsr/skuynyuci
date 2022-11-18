@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg pt-2 pb-3" style="background-color: #F1F3F6">
+<nav class="navbar navbar-expand-lg pt-2 pb-3 navbar-light" style="background-color: #F1F3F6">
     <div class="container">
 
         <a class="navbar-brand mt-2" href="/"><img class="" src="{{ asset('img/brand.png') }}" alt=""
@@ -17,16 +17,10 @@
                         href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Get Started' ? 'active' : '' }}" href="#">News</a>
+                    <a class="fw-bold nav-link {{ $title === 'Get Started' ? 'active' : '' }}" href="#">History</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Support' ? 'active' : '' }}" href="#">Discover</a>
-                </li>
-                <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Support' ? 'active' : '' }}" href="#footer">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Support' ? 'active' : '' }}" href="#footer">Help</a>
+                    <a class="fw-bold nav-link {{ $title === 'Support' ? 'active' : '' }}" href="#">My Profile</a>
                 </li>
             </ul>
 
