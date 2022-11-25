@@ -16,6 +16,22 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function admin()
+    {
+        # code...
+        return view('Auth.admin', [
+            'title' => "Admin Register"
+        ]);
+    }
+
+    public function launderer()
+    {
+        # code...
+        return view('auth.launderer', [
+            'title' => 'Launderer Register'
+        ]);
+    }
+
     public function store(Request $request)
     {
 

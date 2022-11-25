@@ -28,6 +28,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /* register page */
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::get('/register/admin', [RegisterController::class, 'admin'])->name('register');
+Route::get('/register/launderer', [RegisterController::class, 'launderer'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 /* user page */

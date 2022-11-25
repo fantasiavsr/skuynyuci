@@ -18,10 +18,9 @@ class UserController extends Controller
         // $user_image = user_image::where('user_id', $user->id)->first();
         $level = Auth::user()->level;
 
-
         /* dd($level); */
         if ($level == "Admin") {
-            return view('pages.admin.index', compact('user'), [
+            return view('pages.admin.admin_index', compact('user'), [
                 'title' => "Dashboard",
                 'user' => $user,
             ]);
@@ -31,7 +30,7 @@ class UserController extends Controller
                 'user' => $user,
             ]);
         } else if ($level == "Launderer") {
-            return view('pages.launderer.index', compact('user'), [
+            return view('pages.launderer.launderer_index', compact('user'), [
                 'title' => "Dashboard",
                 'user' => $user,
             ]);
