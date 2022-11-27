@@ -31,36 +31,51 @@
 
 <div id="content-wrapper" class="d-flex flex-column">
     <div class="container pt-3">
-    <h2>Users Registered</h2>
-    <table class="table">
+        <div class="card mb-4">
+        <h2>Users Registered</h2>
+        <table class="table">
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Phone</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
+                    @foreach ($data as $d)
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{ $d->name }}</td>
+                        <td>{{ $d->username }}</td>
+                        <td>{{ $d->phone }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="container pt-3">
+        <h2>Launderer List</h2>
+        <table class="table">
+            <thead>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Phone</th>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
+                </thead>
+                <tbody>
+                    @foreach ($dataLaunderer as $d)
+                    <tr>
+                        <th scope="row">{{ $d->id }}</th>
+                        <td>{{ $d->name }}</td>
+                        <td>{{ $d->username }}</td>
+                        <td>{{ $d->phone }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
         </table>
     </div>
 </div>

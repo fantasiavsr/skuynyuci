@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Toko;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -22,11 +23,18 @@ class UserController extends Controller
         if ($level == "Admin") {
             return view('pages.admin.admin_index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => User::select('*')
+                            ->where('level', '=', 'Customer')
+                            ->get(),
+                'dataLaunderer' => User::select('*')
+                                    ->where('level', '=', 'Launderer')
+                                    ->get(),
                 'user' => $user,
             ]);
         } else if ($level == "Customer") {
             return view('pages.customer.index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => Toko::all(),
                 'user' => $user,
             ]);
         } else if ($level == "Launderer") {

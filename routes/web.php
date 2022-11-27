@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\TokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::resource('user', UserController::class)->middleware('auth');
 /* Item */
 Route::get('item detail', [ItemController::class, 'index'])->middleware('auth')->name('item.detailtest');
 /* Route::get('item detail/{id}', [ItemController::class, 'index'])->middleware('auth', 'user')->name('item.detail'); */
+
+Route::get('/toko/reg', [TokoController::class, 'register']);
+Route::post('/toko/reg', [TokoController::class, 'add']);

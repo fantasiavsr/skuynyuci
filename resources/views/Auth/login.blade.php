@@ -59,7 +59,7 @@
 
                         <!-- Register buttons -->
                         <div class="text-center">
-                            <p>Not a member? <a href="{{ route('register') }}" class=" fw-bold"
+                            <p>Not a member? <a href="/register" class=" fw-bold"
                                     style="color: #1947BA">Register</a>
                             </p>
                         </div>

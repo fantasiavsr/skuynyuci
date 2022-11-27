@@ -111,6 +111,7 @@
                         {{-- Laundry Card --}}
                         <div class="row row-cols-1 row-cols-md-2 g-3">
 
+                            @foreach ($data as $d)
                             <div class="col mb-3">
                                 <div class="card">
                                     <div class="row g-0">
@@ -120,11 +121,11 @@
                                         </div>
 
                                         <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
+                                            <h5 class="card-title" style="font-weight: 700; color: black">{{ $d->name }}</h5>
                                             <div class="d-sm-flex justify-content-between">
                                                 <div>
                                                     <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
+                                                            style="color: #1947BA"></i> {{ $d->address }}</p>
                                                 </div>
                                                 <div class="text-right">
                                                     <h4 style="color:black; font-weight: 600">25.000 <span
@@ -139,93 +140,8 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
 
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
