@@ -22,14 +22,14 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        @if (localtime(time()) >= 05)
-                            <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->username }}</h1>
-                        @elseif (localtime(time()) >= 12)
-                            <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->username }}</h1>
-                        @elseif (localtime(time()) >= 16)
-                            <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->username }}</h1>
-                        @elseif (localtime(time()) >= 18)
-                            <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->username }}</h1>
+                        @if (date('H') >= "05")
+                            <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "12")
+                            <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "16")
+                            <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "18")
+                            <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
                         @endif
                     </div>
                     <div class="text-right">
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
+                                            <a href="/item_detail/{{ $d->id }}" class="btn btn-block btn-primary px-4">Detail
                                             </a>
                                         </div>
                                     </div>

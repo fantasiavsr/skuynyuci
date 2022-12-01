@@ -24,11 +24,6 @@
                             <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
                         @endif
                 </div>
-                <div class="text-right">
-                    <p style="line-height: 0px;">Laundry Location</p>
-                    <h5 class="font-weight-bold" style="line-height: 30px; color:black"><i class="fa fa-map-marker"
-                                aria-hidden="true" style="color: #1947BA"></i> </h5>
-                </div>
             </div>
         </div>
     </div>
@@ -37,7 +32,11 @@
 <div id="content-wrapper" class="d-flex flex-columns">
     <div class="container pt-3">
         <h2>Your Laundry Profile</h2>
-        <button class="btn"><a href="/toko/reg">Create Shop</a></button>
+        @if (count($data) >= 0)
+            <button class="btn"><a href="/toko/edt">Edit Shop</a></button>
+        @else
+            <button class="btn"><a href="/toko/reg">Create Shop</a></button>
+        @endif
         <div class="card mb-4">
             <div class="card-body">
             <table class="table">

@@ -40,6 +40,9 @@ class UserController extends Controller
         } else if ($level == "Launderer") {
             return view('pages.launderer.launderer_index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => Toko::select('*')
+                            ->where('user_id', '=', auth()->user()->id)
+                            ->get(),
                 'user' => $user,
             ]);
         } else {

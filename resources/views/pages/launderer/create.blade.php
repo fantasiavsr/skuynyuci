@@ -28,7 +28,7 @@
                 <input type="text" class="form-control" id="name" name="name" value="{{ auth()->user()->name }}" aria-describedby="emailHelp" readonly>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}" aria-describedby="emailHelp" readonly>
+                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{ auth()->user()->id }}" aria-describedby="emailHelp" readonly>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Open-Hour</label>

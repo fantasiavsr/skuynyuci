@@ -40,7 +40,7 @@ Route::resource('user', UserController::class)->middleware('auth');
 
 /* Item */
 Route::get('item detail', [ItemController::class, 'index'])->middleware('auth')->name('item.detailtest');
-/* Route::get('item detail/{id}', [ItemController::class, 'index'])->middleware('auth', 'user')->name('item.detail'); */
+Route::get('item_detail/{id}', [ItemController::class, 'index'])->middleware('auth')->name('item.detail');
 
 Route::get('/toko/reg', [TokoController::class, 'register']);
 Route::post('/toko/reg', [TokoController::class, 'add']);
