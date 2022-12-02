@@ -1,5 +1,6 @@
 @extends('Layouts.main')
 @include('Partials.navbar2')
+@include('sweetalert::alert')
 
 @section('content')
     <div class="pt-5 pb-5" style="background-color: #F9FAFC">
@@ -42,13 +43,17 @@
 
                         <div class="form-outline mb-4">
                             <label class="form-label">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" autocomplete="off"
+                            <input type="text" name="username" id="username" class="form-control @error('username')
+                                is-invalid
+                            @enderror" autocomplete="off"
                                 autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label">Password</label>
-                            <input type="password" name="password" id="password" autocomplete="off" class="form-control"
+                            <input type="password" name="password" id="password" autocomplete="off" class="form-control @error('password')
+                                is-invalid
+                            @enderror"
                                 required>
                         </div>
 

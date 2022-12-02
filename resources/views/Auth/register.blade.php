@@ -1,6 +1,8 @@
 @extends('Layouts.main')
 @include('Partials.navbar2')
 
+@include('sweetalert::alert')
+
 @section('content')
     <div class="pt-5 pb-5" style="background-color: #F9FAFC">
         <div class="container">
@@ -10,7 +12,7 @@
                 <button class="btn"><i class="bi bi-chevron-left pe-2"></i>back</button>
             </a>
         </div>
-        <div class="container" style="">
+        <div class="container">
             <div class="row pb-5">
                 <div class="col pt-5 pb-5 px-4 text-dark">
                     <div class="text-dark">
@@ -41,28 +43,38 @@
                         @csrf
                         <div class="form-outline mb-4">
                             <label class="form-label">Nama Lengkap</label>
-                            <input type="text" name="name" id="name" class="form-control" autofocus
+                            <input type="text" name="name" id="name" class="form-control @error('name')
+                                is-invalid
+                            @enderror" autofocus
                                 required>
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" autofocus required>
+                            <input type="text" name="username" id="username" class="form-control @error('username')
+                                is-invalid
+                            @enderror" autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" autofocus required>
+                            <input type="email" name="email" id="email" class="form-control @error('email')
+                                is-invalid
+                            @enderror" autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label">No Telepon</label>
-                            <input type="text" name="phone" id="phone" class="form-control" autofocus required>
+                            <input type="text" name="phone" id="phone" class="form-control @error('phone')
+                                is-invalid
+                            @enderror" autofocus required>
                         </div>
 
                         <div class="form-outline mb-4">
                             <label class="form-label">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" required>
+                            <input type="password" name="password" id="password" class="form-control @error('password')
+                                is-invalid
+                            @enderror" required>
                         </div>
 
                         <input type="hidden" name="level" value="Customer">

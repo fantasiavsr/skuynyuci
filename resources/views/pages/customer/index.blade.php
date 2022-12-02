@@ -22,13 +22,13 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        @if (date('H') >= "05")
+                        @if (date('H') >= 05)
                             <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "12")
+                        @elseif (date('H') >= 12)
                             <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "16")
+                        @elseif (date('H') >= 16)
                             <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "18")
+                        @elseif (date('H') >= 18)
                             <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
                         @endif
                     </div>
@@ -127,11 +127,11 @@
                                                     <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
                                                             style="color: #1947BA"></i> {{ $d->address }}</p>
                                                 </div>
-                                                <div class="text-right">
+                                                <!-- <div class="text-right">
                                                     <h4 style="color:black; font-weight: 600">25.000 <span
                                                             style="font-size: 60%">
                                                             /pcs</span></h4>
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                             <a href="/item_detail/{{ $d->id }}" class="btn btn-block btn-primary px-4">Detail

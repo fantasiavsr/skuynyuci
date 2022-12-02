@@ -36,9 +36,9 @@ class RegisterController extends Controller
     {
 
         $validateData = $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:5',
             'username' => 'required|min:3',
-            'email' => 'required',
+            'email' => 'required|email|unique:email',
             'phone' => 'required|numeric',
             'level' => 'required',
             'password' => 'required|min:8',
@@ -49,6 +49,7 @@ class RegisterController extends Controller
 
         if ($validateData) {
             User::create($validateData);
+
             return redirect()->route('login')->with('success', 'User Successfully Added');
         } else {
             return back()->with('error', 'Some error encountered');

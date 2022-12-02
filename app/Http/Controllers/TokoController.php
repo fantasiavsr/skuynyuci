@@ -25,10 +25,10 @@ class TokoController extends Controller
     {
         # code...
         $validate = $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:5',
             'user_id' => 'required',
-            'open' => 'required',
-            'close' => 'required',
+            'open' => 'required|numeric',
+            'close' => 'required|numeric',
             'address' => 'required|min:5'
         ]);
 

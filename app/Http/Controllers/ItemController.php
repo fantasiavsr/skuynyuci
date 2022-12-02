@@ -48,8 +48,8 @@ class ItemController extends Controller
         # code...
         $validate = $request->validate([
             'toko_id' => 'required',
-            'name' => 'required',
-            'harga' => 'required',
+            'name' => 'required|min:5',
+            'harga' => 'required|numeric',
             'unit' => 'required'
         ]);
 

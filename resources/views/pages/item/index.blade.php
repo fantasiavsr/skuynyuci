@@ -26,7 +26,7 @@
                     @foreach ($item as $i)
                         <a href="#">
                                 <button type="button"
-                                    class="btn rounded-pill btn-outline-primary px-4 me-sm-3">{{ $i->name }}</button>
+                                    data-toggle="tooltip" data-placement="top" title="{{ $i->harga }} /{{$i->unit}}" class="btn rounded-pill btn-outline-primary px-4 me-sm-3">{{ $i->name }}</button>
                         </a>
                     @endforeach
                 </div>
