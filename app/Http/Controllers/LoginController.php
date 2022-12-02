@@ -29,7 +29,8 @@ class LoginController extends Controller
         }
         /* dd('Invalid credentials'); */
         return back()->withErrors([
-            'msg1' => 'Login Error, Please Try Again.', 'msg2' => 'Check your username and password.'
+            'msg1' => 'Login Error, Please Try Again.',
+            'msg2' => 'Check your username and password.'
         ]);
     }
 

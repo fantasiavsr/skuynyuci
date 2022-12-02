@@ -22,7 +22,15 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->username }}</h1>
+                        @if (date('H') >= "05")
+                            <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "12")
+                            <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "16")
+                            <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
+                        @elseif (date('H') >= "18")
+                            <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
+                        @endif
                     </div>
                     <div class="text-right">
                         <p style="line-height: 0px;">Current Location</p>
@@ -125,7 +133,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
+                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
                                             </a>
                                         </div>
                                     </div>
@@ -183,7 +191,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
+                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
                                             </a>
                                         </div>
                                     </div>
@@ -212,7 +220,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="btn btn-block btn-primary px-4">Detail
+                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
                                             </a>
                                         </div>
                                     </div>

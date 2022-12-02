@@ -14,7 +14,7 @@
             <ul class="navbar-nav mx-auto mt-3 mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="fw-bold nav-link {{ $title === 'Home' ? 'active' : '' }}"
-                        href="{{ route('home') }}">Home</a>
+                        href="{{ route('user.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="fw-bold nav-link {{ $title === 'Get Started' ? 'active' : '' }}" href="#">History</a>

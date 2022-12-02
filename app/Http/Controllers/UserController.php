@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\Toko;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -18,21 +20,31 @@ class UserController extends Controller
         // $user_image = user_image::where('user_id', $user->id)->first();
         $level = Auth::user()->level;
 
-
         /* dd($level); */
         if ($level == "Admin") {
-            return view('pages.admin.index', compact('user'), [
+            return view('pages.admin.admin_index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => User::select('*')
+                            ->where('level', '=', 'Customer')
+                            ->get(),
+                'dataLaunderer' => User::select('*')
+                                    ->where('level', '=', 'Launderer')
+                                    ->get(),
                 'user' => $user,
             ]);
         } else if ($level == "Customer") {
             return view('pages.customer.index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => Toko::all(),
+                'item' => Item::all(),
                 'user' => $user,
             ]);
         } else if ($level == "Launderer") {
-            return view('pages.launderer.index', compact('user'), [
+            return view('pages.launderer.launderer_index', compact('user'), [
                 'title' => "Dashboard",
+                'data' => Toko::select('*')
+                            ->where('user_id', '=', auth()->user()->id)
+                            ->get(),
                 'user' => $user,
             ]);
         } else {
