@@ -32,8 +32,8 @@
 <div id="content-wrapper" class="d-flex flex-columns">
     <div class="container pt-3">
         <h2>Your Laundry Profile</h2>
-        @if (count($data) >= 0)
-            <button class="btn"><a href="/toko/edt">Edit Shop</a></button>
+        @if (count($data))
+            <button class="btn"><a href="/toko/reg">Edit Shop</a></button>
         @else
             <button class="btn"><a href="/toko/reg">Create Shop</a></button>
         @endif
@@ -46,6 +46,7 @@
                     <th scope="col">Open Hour</th>
                     <th scope="col">Close</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +56,7 @@
                     <td>{{ $d->open }}</td>
                     <td>{{ $d->close }}</td>
                     <td>{{ $d->address }}</td>
+                    <td><button class="btn"><a href="/item/add/{{ $d->id }}">Add Item</a></button></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -63,7 +65,6 @@
         </div>
     </div>
 </div>
-
 
     <!-- Scroll to Top Button-->
     @include('Partials.scrolltotop')

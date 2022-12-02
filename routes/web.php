@@ -38,9 +38,14 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 /* Resource */
 Route::resource('user', UserController::class)->middleware('auth');
 
-/* Item */
+/* Item Client Area */
 Route::get('item detail', [ItemController::class, 'index'])->middleware('auth')->name('item.detailtest');
 Route::get('item_detail/{id}', [ItemController::class, 'index'])->middleware('auth')->name('item.detail');
 
+/* Item Launderer Area */
+Route::get('/item/add/{id}', [ItemController::class, 'addForm'])->middleware('auth');
+Route::post('/item/add', [ItemController::class, 'add'])->middleware('auth');
+
+// Toko Route
 Route::get('/toko/reg', [TokoController::class, 'register']);
 Route::post('/toko/reg', [TokoController::class, 'add']);

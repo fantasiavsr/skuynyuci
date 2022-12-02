@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Toko;
 use App\Models\User;
 
@@ -35,6 +36,7 @@ class UserController extends Controller
             return view('pages.customer.index', compact('user'), [
                 'title' => "Dashboard",
                 'data' => Toko::all(),
+                'item' => Item::all(),
                 'user' => $user,
             ]);
         } else if ($level == "Launderer") {
