@@ -63,8 +63,25 @@ class ItemController extends Controller
             'toko_image' => $toko_image,
             'toko_category' => $toko_category,
         ]);
+    }
 
+    public function itemDetailService($id)
+    {
+        $user = Auth::user();
 
+        $toko = Toko::findOrFail($id);
+        $service = Item::where('toko_id', $id)->get();
+        $toko_image = laundry_image::where('toko_id', $id)->first();
+        $toko_category = laundry_categories::where('toko_id', $id)->get();
+        /* dd($toko_image); */
+        return view('pages.item.detail.service', [
+            'title' => "Item Detail",
+            'user' => $user,
+            'toko' => $toko,
+            'service' => $service,
+            'toko_image' => $toko_image,
+            'toko_category' => $toko_category,
+        ]);
     }
 
     public function ordertest()

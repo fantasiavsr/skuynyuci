@@ -53,13 +53,13 @@
                                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                                     <div class="col-md-9">
                                         <div class="">
-                                            <a href="{{ route('item.detail', ['id' => $toko->id]) }}" class="btn btn-light active">About</a>
-                                            <a href="{{ route('item.detailservice', ['id' => $toko->id]) }}" class="btn btn-light">Service</a>
+                                            <a href="{{ route('item.detail', ['id' => $toko->id]) }}" class="btn btn-light">About</a>
+                                            <a href="{{ route('item.detailservice', ['id' => $toko->id]) }}" class="btn btn-light active">Service</a>
                                             <a href="#" class="btn btn-light">Review</a>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <a href="{{ route('item.order.detailtest') }}" class="btn btn-lg btn-primary">
+                                        <a href="#" class="btn btn-lg btn-primary">
                                             Order | 25.00/pcs
                                         </a>
                                     </div>
@@ -69,9 +69,7 @@
                                     <div class="row">
                                         <div class="col-md-9">
                                             <h5 class="font-weight-bold pt-3">
-                                                Fresh Laundry is an Online Laundry Service Provider. We provide laundry, dry
-                                                cleaning, and steam press services. Custmers can schedule a laundry pick-up
-                                                through our App/Website or can also drop off laundry at our place.
+                                               This is Service Page.
                                             </h5>
                                         </div>
                                     </div>

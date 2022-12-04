@@ -12,8 +12,8 @@
     filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.15));
 }
 
-.shadow-custom-green {
-    box-shadow: 0px 16px 40px rgba(79, 190, 171, 0.25);
+.shadow-custom-blue {
+    filter: drop-shadow(0px 16px 40px rgba(25, 71, 186, 0.25));
 }
 
 .shadow-custom-alt {

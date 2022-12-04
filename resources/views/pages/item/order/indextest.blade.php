@@ -26,68 +26,133 @@
                     </div>
                 </div>
 
-                <!-- Content -->
-                <div class="text-center">
-                    <img src="{{ asset('img/laundry-photo.png') }}" class="img-fluid " alt="" style="width: 1000px;">
+
+                {{-- Content Row --}}
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+                        {{-- Sub Title --}}
+                        <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-4 mb-4">
+                            <h1 class="h5 mb-0 text-gray-800 font-weight-bold">Order List</h1>
+                            <a href="#" class="h7 mb-0 ">Add Item</a>
+                        </div>
+
+                        {{-- Still need fixing alignments --}}
+                        {{-- Card --}}
+                        <div class="card mb-3" style="width: 100%">
+                            {{-- Card Body --}}
+                            <div class="card-body">
+                                <div class="d-sm-flex align-items-center justify-content-between">
+                                    <div class="">
+                                        <img class="avatar rounded-circle-" src="{{ asset('img/type/t-shirt.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div class="">
+                                        <h6 class="font-weight-bold">T-Shirt</h6>
+                                        <h6>Rp. 25.000</h6>
+                                    </div>
+                                    <div class="">
+                                        <h6 class="font-weight-bold">Quantity</h6>
+                                        <h6>2</h6>
+                                    </div>
+                                    <div class="">
+                                        <a href="#" class="btn btn-outline-dark px-4">edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Card --}}
+                        <div class="card mb-3" style="width: 100%">
+                            {{-- Card Body --}}
+                            <div class="card-body">
+                                <div class="d-sm-flex align-items-center justify-content-between">
+                                    <div class="">
+                                        <img class="avatar rounded-circle-" src="{{ asset('img/type/jeans.png') }}"
+                                            alt="">
+                                    </div>
+                                    <div class="">
+                                        <h6 class="font-weight-bold">Jeans</h6>
+                                        <h6>Rp. 25.000</h6>
+                                    </div>
+                                    <div class="">
+                                        <h6 class="font-weight-bold">Quantity</h6>
+                                        <h6>1</h6>
+                                    </div>
+                                    <div class="">
+                                        <a href="#" class="btn btn-outline-dark px-4">edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-4">
+
+                        {{-- Sub Title --}}
+                        <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-4 mb-4">
+                            <h1 class="h5 mb-0 text-gray-800 font-weight-bold">Delivery Address</h1>
+                            <a href="#" class="h7 mb-0 ">Edit Address</a>
+                        </div>
+
+                        {{-- Card --}}
+                        <div class="card mb-3" style="width: 100%">
+                            {{-- Card Body --}}
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <img src="{{ asset('img/dummy/map.png') }}" alt="" class="img-fluid"
+                                        style="width: 100%">
+                                </div>
+                                <div>
+                                    <h6>name</h6>
+                                    <h6 class="font-weight-bold">{{ $user->name }}</h6>
+                                    <h6>address</h6>
+                                    <h6 class="font-weight-bold">Jl. Raya Cibubur No. 1, Cibubur, Jakarta Timur</h6>
+                                    <h6>phone</h6>
+                                    <h6 class="font-weight-bold">{{ $user->phone }}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="row">
+                <br>
+                <br><br>
+            </div>
+
+            {{-- Sticky Checkout --}}
+            <div class="container px-3 py-5 shadow-custom"
+                style="background-color: #ffffff; position:sticky; position:-webkit-sticky; bottom:0; border-radius:25px 25px 0px 0px">
+                <div class="row px-5">
                     <div class="col">
-                        <div class="card mb-4" style="width:100%">
-                            <div class="card-body">
-                                <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
-                                    <div class="col-md-9">
-                                        <div class="">
-                                            <a href="#" class="btn btn-light">About</a>
-                                            <a href="#" class="btn btn-light">Service</a>
-                                            <a href="#" class="btn btn-light">Review</a>
-                                        </div>
-                                    </div>
-                                    <div class="text-right">
-                                        <a href="{{ route('item.order.detailtest') }}" class="btn btn-lg btn-primary">
-                                            Order | 25.00/pcs
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="px-3">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <h5 class="font-weight-bold pt-3">
-                                                Fresh Laundry is an Online Laundry Service Provider. We provide laundry, dry
-                                                cleaning, and steam press services. Custmers can schedule a laundry pick-up
-                                                through our App/Website or can also drop off laundry at our place.
-                                            </h5>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="font-weight-bold">email</p>
-                                            <p>freshlaundry@mail.com</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="font-weight-bold">phone</p>
-                                            <p>+62 838-4545-3232</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="font-weight-bold">social media</p>
-                                            <p>@freshlaundry</p>
-                                        </div>
-                                    </div>
-                                </div>
-
+                        <div class="row">
+                            <div class="pr-4">
+                                <img class="avatar rounded-circle-" src="{{ asset('img/dummy/checkout.png') }}"
+                                    alt="">
+                            </div>
+                            <div>
+                                <h6 class="font-weight-bold">Total Items</h6>
+                                <h6>Rp. 50.000</h6>
                             </div>
                         </div>
                     </div>
+                    <div class="col">
+                        <h6 class="font-weight-bold">Cost</h6>
+                        <h6>Rp. 10.000</h6>
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue"
+                            style="border-radius: 10px">Order</a>
+                    </div>
                 </div>
-
             </div>
+            <!-- Scroll to Top Button-->
+            @include('Partials.scrolltotop')
 
-        </div>
-        <!-- Scroll to Top Button-->
-        @include('Partials.scrolltotop')
-
-        <!-- Logout Modal-->
-        @include('Partials.logoutmodal')
-    @endsection
+            <!-- Logout Modal-->
+            @include('Partials.logoutmodal')
+        @endsection
