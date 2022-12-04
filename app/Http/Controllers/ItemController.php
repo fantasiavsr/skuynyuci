@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Toko;
 use App\Models\User;
+use App\Models\laundry_categories;
+use App\Models\laundry_image;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,10 +19,10 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index($id)
+    public function index()
     {
         $user = Auth::user();
-        $data = Toko::findOrFail($id);
+        $data = Toko::all();
         $item = Item::all();
         $detail = User::select('*')
                 ->where('level', '=', 'Launderer')
@@ -41,6 +44,27 @@ class ItemController extends Controller
             'title' => "Item Detail",
             'user' => $user,
         ]);
+    }
+
+    public function itemDetail($id)
+    {
+        $user = Auth::user();
+
+        $toko = Toko::findOrFail($id);
+        $service = Item::where('toko_id', $id)->get();
+        $toko_image = laundry_image::where('toko_id', $id)->first();
+        $toko_category = laundry_categories::where('toko_id', $id)->get();
+        /* dd($toko_image); */
+        return view('pages.item.detail.index', [
+            'title' => "Item Detail",
+            'user' => $user,
+            'toko' => $toko,
+            'service' => $service,
+            'toko_image' => $toko_image,
+            'toko_category' => $toko_category,
+        ]);
+
+
     }
 
     public function ordertest()

@@ -9,7 +9,6 @@
     <meta name="author" content="">
 
     <title>{{ $title }}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/gv-logo-box.png') }}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('demo/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,6 +24,7 @@
     <!-- Custom styles for DataTable-->
     <link href="{{ asset('demo/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logo-only.png') }}">
 </head>
 
 <body id="page-top">

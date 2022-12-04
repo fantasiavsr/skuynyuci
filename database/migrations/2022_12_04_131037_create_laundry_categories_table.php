@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('laundry_categories', function (Blueprint $table) {
+            $table->id();
             $table->integer('toko_id')->unsigned();
             $table->string('name');
-            $table->integer('harga');
-            $table->string('unit');
-            $table->string('about');
             $table->timestamps();
 
             $table->foreign('toko_id')
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('laundry_categories');
     }
 };

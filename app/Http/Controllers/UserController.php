@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Toko;
 use App\Models\User;
+use App\Models\laundry_categories;
+use App\Models\laundry_image;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +37,10 @@ class UserController extends Controller
         } else if ($level == "Customer") {
             return view('pages.customer.index', compact('user'), [
                 'title' => "Dashboard",
-                'data' => Toko::all(),
-                'item' => Item::all(),
+                'toko' => Toko::all(),
+                'service' => Item::all(),
+                'toko_image' => laundry_image::all(),
+                'toko_category' => laundry_categories::all(),
                 'user' => $user,
             ]);
         } else if ($level == "Launderer") {

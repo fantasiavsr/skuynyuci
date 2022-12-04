@@ -18,4 +18,12 @@ class Toko extends Model
     public function Item(){
         return $this->hasMany(Item::class);
     }
+
+    public function laundry_categories(){
+        return $this->hasMany(laundry_categories::class);
+    }
+
+    public function laundry_image(){
+        return $this->hasMany(laundry_image::class);
+    }
 }

@@ -22,13 +22,13 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        @if (date('H') >= "05")
+                        @if (date('H') >= '05')
                             <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "12")
+                        @elseif (date('H') >= '12')
                             <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "16")
+                        @elseif (date('H') >= '16')
                             <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= "18")
+                        @elseif (date('H') >= '18')
                             <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
                         @endif
                     </div>
@@ -111,7 +111,45 @@
                         {{-- Laundry Card --}}
                         <div class="row row-cols-1 row-cols-md-2 g-3">
 
-                            <div class="col mb-3">
+                            @foreach ($toko as $item)
+                                <div class="col mb-3">
+                                    <div class="card">
+                                        <div class="row g-0">
+                                            <div class="px-4 pt-2 shadow-custom-lg">
+                                                {{-- Butuh Fix Responsive Image biar ga streched --}}
+                                                <img class="img-fluid" alt="..."
+                                                    @if ($toko_image->where('toko_id', $item->id)->pluck('image')->first() != null) src="{{ asset('img/produk/' .$toko_image->where('toko_id', $item->id)->pluck('image')->first()) }}"
+                                                            @else
+                                                                src="{{ asset('img/produk/laundry-photo.png') }}" @endif
+                                                    style="border-radius: 10pt; height: 200px; width:100%">
+                                            </div>
+
+                                            <div class="card-body mx-2 my-2">
+                                                <h5 class="card-title" style="font-weight: 700; color: black">
+                                                    {{ $item->name }}</h5>
+                                                <div class="d-sm-flex justify-content-between">
+                                                    <div>
+                                                        <p style="color:black"><i class="fa fa-map-marker"
+                                                                aria-hidden="true" style="color: #1947BA"></i> 157m</p>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <h4 style="color:black; font-weight: 600">
+                                                            {{ $service->where('toko_id', $item->id)->pluck('harga')->first() }}
+                                                            <span style="font-size: 60%">
+                                                                /pcs</span></h4>
+                                                    </div>
+                                                </div>
+
+                                                <a href="{{ route('item.detail',  ['id' => $item->id]) }}"
+                                                    class="btn btn-block btn-primary px-4">Detail
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            {{-- <div class="col mb-3">
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="px-4 pt-2 shadow-custom-lg">
@@ -138,94 +176,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-3">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="px-4 pt-2 shadow-custom-lg">
-                                            <img src="{{ asset('img/item-1.jpg') }}" class="img-fluid" alt="..."
-                                                style="border-radius: 10pt">
-                                        </div>
-
-                                        <div class="card-body mx-2 my-2">
-                                            <h5 class="card-title" style="font-weight: 700; color: black">Fresh Laundry</h5>
-                                            <div class="d-sm-flex justify-content-between">
-                                                <div>
-                                                    <p style="color:black"><i class="fa fa-map-marker" aria-hidden="true"
-                                                            style="color: #1947BA"></i> 157m</p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <h4 style="color:black; font-weight: 600">25.000 <span
-                                                            style="font-size: 60%">
-                                                            /pcs</span></h4>
-                                                </div>
-                                            </div>
-
-                                            <a href="{{ route('item.detailtest') }}" class="btn btn-block btn-primary px-4">Detail
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

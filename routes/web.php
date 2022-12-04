@@ -41,7 +41,7 @@ Route::resource('user', UserController::class)->middleware('auth');
 
 /* Item Client Area */
 Route::get('item detail', [ItemController::class, 'ItemDetailTest'])->middleware('auth')->name('item.detailtest');
-/* Route::get('item_detail/{id}', [ItemController::class, 'index'])->middleware('auth')->name('item.detail'); */
+Route::get('item_detail/{id}', [ItemController::class, 'itemDetail'])->middleware('auth')->name('item.detail');
 
 /* Order Item */
 Route::get('item order', [ItemController::class, 'ordertest'])->middleware('auth')->name('item.order.detailtest');
