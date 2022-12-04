@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class laundry_image extends Model
+class item_type extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function toko(){
-        return $this->belongsTo(Toko::class);
+    public function laundry_item(){
+        return $this->hasMany(laundry_item::class);
     }
 }

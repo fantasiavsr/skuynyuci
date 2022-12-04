@@ -134,7 +134,7 @@
                                                     </div>
                                                     <div class="text-right">
                                                         <h4 style="color:black; font-weight: 600">
-                                                            {{ $service->where('toko_id', $item->id)->pluck('harga')->first() }}
+                                                            ##
                                                             <span style="font-size: 60%">
                                                                 /pcs</span></h4>
                                                     </div>

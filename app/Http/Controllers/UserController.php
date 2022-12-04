@@ -38,7 +38,6 @@ class UserController extends Controller
             return view('pages.customer.index', compact('user'), [
                 'title' => "Dashboard",
                 'toko' => Toko::all(),
-                'service' => Item::all(),
                 'toko_image' => laundry_image::all(),
                 'toko_category' => laundry_categories::all(),
                 'user' => $user,

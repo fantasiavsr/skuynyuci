@@ -23,7 +23,6 @@ class ItemController extends Controller
     {
         $user = Auth::user();
         $data = Toko::all();
-        $item = Item::all();
         $detail = User::select('*')
                 ->where('level', '=', 'Launderer')
                 ->get();
@@ -32,7 +31,6 @@ class ItemController extends Controller
             'title' => "Item Detail",
             'data' => $data,
             'user' => $user,
-            'item' => $item,
             'detail' => $detail
         ]);
     }
@@ -51,7 +49,6 @@ class ItemController extends Controller
         $user = Auth::user();
 
         $toko = Toko::findOrFail($id);
-        $service = Item::where('toko_id', $id)->get();
         $toko_image = laundry_image::where('toko_id', $id)->first();
         $toko_category = laundry_categories::where('toko_id', $id)->get();
         /* dd($toko_image); */
@@ -59,7 +56,6 @@ class ItemController extends Controller
             'title' => "Item Detail",
             'user' => $user,
             'toko' => $toko,
-            'service' => $service,
             'toko_image' => $toko_image,
             'toko_category' => $toko_category,
         ]);
@@ -70,7 +66,6 @@ class ItemController extends Controller
         $user = Auth::user();
 
         $toko = Toko::findOrFail($id);
-        $service = Item::where('toko_id', $id)->get();
         $toko_image = laundry_image::where('toko_id', $id)->first();
         $toko_category = laundry_categories::where('toko_id', $id)->get();
         /* dd($toko_image); */
@@ -78,7 +73,6 @@ class ItemController extends Controller
             'title' => "Item Detail",
             'user' => $user,
             'toko' => $toko,
-            'service' => $service,
             'toko_image' => $toko_image,
             'toko_category' => $toko_category,
         ]);
@@ -90,6 +84,22 @@ class ItemController extends Controller
         return view('pages.item..order.indextest', [
             'title' => "Item Order",
             'user' => $user,
+        ]);
+    }
+
+    public function order($id)
+    {
+        $user = Auth::user();
+        $toko = Toko::findOrFail($id);
+        $toko_image = laundry_image::where('toko_id', $id)->first();
+        $toko_category = laundry_categories::where('toko_id', $id)->get();
+
+        return view('pages.item..order.index', [
+            'title' => "Item Order",
+            'user' => $user,
+            'toko' => $toko,
+            'toko_image' => $toko_image,
+            'toko_category' => $toko_category,
         ]);
     }
 
@@ -116,7 +126,6 @@ class ItemController extends Controller
 
         if ($validate) {
             # code...
-            Item::create($validate);
             return redirect('user')->with('success', 'Item Created Successfully');
         } else {
             return back()->with('error', 'Something went wrong');

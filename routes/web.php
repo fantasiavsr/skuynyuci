@@ -46,6 +46,7 @@ Route::get('item service/{id}', [ItemController::class, 'itemDetailService'])->m
 
 /* Order Item */
 Route::get('item order', [ItemController::class, 'ordertest'])->middleware('auth')->name('item.order.detailtest');
+Route::get('item order/{id}', [ItemController::class, 'order'])->middleware('auth')->name('item.order.detail');
 
 /* Item Launderer Area */
 Route::get('/item/add/{id}', [ItemController::class, 'addForm'])->middleware('auth');

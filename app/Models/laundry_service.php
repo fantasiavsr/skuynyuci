@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class laundry_image extends Model
+class laundry_service extends Model
 {
     use HasFactory;
 
@@ -13,5 +13,9 @@ class laundry_image extends Model
 
     public function toko(){
         return $this->belongsTo(Toko::class);
+    }
+
+    public function service(){
+        return $this->belongsTo(service::class);
     }
 }

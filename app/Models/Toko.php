@@ -26,4 +26,12 @@ class Toko extends Model
     public function laundry_image(){
         return $this->hasMany(laundry_image::class);
     }
+
+    public function laundry_service(){
+        return $this->hasMany(laundry_service::class);
+    }
+
+    public function laundry_item(){
+        return $this->hasMany(laundry_item::class);
+    }
 }

@@ -30,6 +30,7 @@
                 {{-- Content Row --}}
                 <div class="row">
 
+                    {{-- Order List --}}
                     <div class="col-sm-8">
 
                         {{-- Sub Title --}}
@@ -89,6 +90,7 @@
 
                     </div>
 
+                    {{-- Delivery Address --}}
                     <div class="col-sm-4">
 
                         {{-- Sub Title --}}

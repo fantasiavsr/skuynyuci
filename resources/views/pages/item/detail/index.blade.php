@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <a href="{{ route('item.order.detailtest') }}" class="btn btn-lg btn-primary">
+                                        <a href="{{ route('item.order.detail', ['id' => $toko->id]) }}" class="btn btn-lg btn-primary">
                                             Order | 25.00/pcs
                                         </a>
                                     </div>

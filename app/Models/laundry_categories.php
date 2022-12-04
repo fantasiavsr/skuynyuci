@@ -11,7 +11,7 @@ class laundry_categories extends Model
 
     protected $guarded = ['id'];
 
-    public function Toko(){
+    public function toko(){
         return $this->belongsTo(Toko::class);
     }
 }
