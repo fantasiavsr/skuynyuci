@@ -32,8 +32,14 @@
                 </div>
 
                 <!-- Content -->
-                <div class="text-center">
-                    <img src="{{ asset('img/laundry-photo.png') }}" class="img-fluid " alt="" style="width: 1000px">
+                <div class="text-center mb-5">
+                    <img src="{{ asset('img/laundry-photo.png') }}" class="img-fluid mt-2 mb-5 shadow-custom-lg" alt="" style="width: 700px; border-radius: 25px">
+                    <div class="d-flex justify-content-center" style="gap: 10px">
+                        <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">Wash</button>
+                        <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">Iron</button>
+                        <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">Dry Clean</button>
+                        <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">+2</button>
+                    </div>
                 </div>
 
                 <div class="row">

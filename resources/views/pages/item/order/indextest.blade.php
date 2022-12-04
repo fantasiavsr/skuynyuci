@@ -28,7 +28,7 @@
 
                 <!-- Content -->
                 <div class="text-center">
-                    <img src="{{ asset('img/laundry-photo.png') }}" class="img-fluid " alt="" style="width: 1000px">
+                    <img src="{{ asset('img/laundry-photo.png') }}" class="img-fluid " alt="" style="width: 1000px;">
                 </div>
 
                 <div class="row">

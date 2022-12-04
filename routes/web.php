@@ -40,7 +40,7 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::resource('user', UserController::class)->middleware('auth');
 
 /* Item Client Area */
-Route::get('item detail', [ItemController::class, 'indextest'])->middleware('auth')->name('item.detailtest');
+Route::get('item detail', [ItemController::class, 'ItemDetailTest'])->middleware('auth')->name('item.detailtest');
 /* Route::get('item_detail/{id}', [ItemController::class, 'index'])->middleware('auth')->name('item.detail'); */
 
 /* Order Item */

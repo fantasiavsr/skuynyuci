@@ -10,4 +10,8 @@ class Item extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function Toko(){
+        return $this->belongsTo(Toko::class);
+    }
 }

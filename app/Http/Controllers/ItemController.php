@@ -16,24 +16,6 @@ class ItemController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function indextest()
-    {
-        $user = Auth::user();
-        return view('pages.item.indextest', [
-            'title' => "Item Detail",
-            'user' => $user,
-        ]);
-    }
-
-    public function ordertest()
-    {
-        $user = Auth::user();
-        return view('pages.item..order.indextest', [
-            'title' => "Item Order",
-            'user' => $user,
-        ]);
-    }
-
     public function index($id)
     {
         $user = Auth::user();
@@ -51,6 +33,25 @@ class ItemController extends Controller
             'detail' => $detail
         ]);
     }
+
+    public function itemDetailTest()
+    {
+        $user = Auth::user();
+        return view('pages.item.detail.indextest', [
+            'title' => "Item Detail",
+            'user' => $user,
+        ]);
+    }
+
+    public function ordertest()
+    {
+        $user = Auth::user();
+        return view('pages.item..order.indextest', [
+            'title' => "Item Order",
+            'user' => $user,
+        ]);
+    }
+
 
     public function addForm($id) {
         $user = Auth::user();
