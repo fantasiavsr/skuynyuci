@@ -22,7 +22,10 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                     <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">{{ $toko->name }} - Order</h1>
+                        <h1 class="font-weight-bold" style="color: black">{{ $toko->name }} - Order <span
+                                class="badge text-light"
+                                style="font-weight:500; font-size:15px; background-color:#446DB5">{{ $order->order_number }}</span>
+                        </h1>
                     </div>
                 </div>
 
@@ -36,23 +39,34 @@
                         {{-- Sub Title --}}
                         <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-4 mb-4">
                             <h1 class="h5 mb-0 text-gray-800 font-weight-bold">Order List</h1>
-                            <a href="{{ route('item.order.add', ['order_number' => $order->order_number]) }}" class="h7 mb-0 ">Add Item</a>
+                            <a href="{{ route('item.order.add', ['order_number' => $order->order_number]) }}"
+                                class="h7 mb-0 ">Add
+                                Item</a>
                         </div>
 
                         {{-- Still need fixing alignments --}}
                         {{-- Card --}}
-                        <div class="card mb-3" style="width: 100%">
-                            @if (isset($order_list))
-                                @foreach ($order_list as $item)
+                        @if (isset($order_list))
+                            @foreach ($order_list as $item)
+                                <div class="card mb-2" style="width: 100%">
                                     {{-- Card Body --}}
                                     <div class="card-body">
                                         <div class="d-sm-flex align-items-center justify-content-between">
                                             <div class="">
                                                 <img class="avatar rounded-circle-"
-                                                    src="{{ asset('img/type/t-shirt.png') }}" alt="">
+                                                    @if ($item_type->where('id', $laundry_item->where('id', $item->laundry_item_id)->first()->item_type_id)->first() != null) src="{{ asset('img/type/' .$item_type->where('id', $laundry_item->where('id', $item->laundry_item_id)->first()->item_type_id)->pluck('image')->first()) }}"
+                                                        @else
+                                                        src="{{ asset('img/type/t-shirt.png') }}" @endif
+                                                    alt="">
                                             </div>
                                             <div class="">
-                                                <h6 class="font-weight-bold">{{ $item->laundry_item->item_type->name }}</h6>
+                                                <h6 class="font-weight-bold">
+                                                    @php
+                                                        $item_type_id = $laundry_item->where('id', $item->laundry_item_id)->first()->item_type_id;
+                                                        $item_type_name = $item_type->where('id', $item_type_id)->first()->name;
+                                                        echo $item_type_name;
+                                                    @endphp
+                                                </h6>
                                                 <h6>Rp. {{ $item->price }}</h6>
                                             </div>
                                             <div class="">
@@ -61,15 +75,23 @@
                                             </div>
                                             <div class="">
                                                 <h6 class="font-weight-bold">Service</h6>
-                                                <h6>{{ $item->service->name }}</h6>
+                                                <h6>
+                                                    @php
+                                                        $service_id = $laundry_service->where('id', $item->laundry_service_id)->first()->service_id;
+                                                        $service_name = $service->where('id', $service_id)->first()->name;
+                                                        echo $service_name;
+                                                    @endphp
+                                                </h6>
                                             </div>
                                             <div class="">
                                                 <a href="#" class="btn btn-outline-dark px-4">edit</a>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @else
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="card" style="width: 100%">
                                 <div class="card-body">
                                     <div class="d-sm-flex align-items-center justify-content-between">
                                         <div class="">
@@ -77,34 +99,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-
-                            {{-- Card Body --}}
-                            {{-- <div class="card-body">
-                                <div class="d-sm-flex align-items-center justify-content-between">
-                                    <div class="">
-                                        <img class="avatar rounded-circle-" src="{{ asset('img/type/t-shirt.png') }}"
-                                            alt="">
-                                    </div>
-                                    <div class="">
-                                        <h6 class="font-weight-bold">T-Shirt</h6>
-                                        <h6>Rp. 25.000</h6>
-                                    </div>
-                                    <div class="">
-                                        <h6 class="font-weight-bold">Quantity</h6>
-                                        <h6>2</h6>
-                                    </div>
-                                    <div class="">
-                                        <h6 class="font-weight-bold">Service</h6>
-                                        <h6>Wash</h6>
-                                    </div>
-                                    <div class="">
-                                        <a href="#" class="btn btn-outline-dark px-4">edit</a>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                        </div>
+                            </div>
+                        @endif
 
                     </div>
 

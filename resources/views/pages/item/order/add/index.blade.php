@@ -46,12 +46,13 @@
                                 <form action="{{ route('item.order.store') }}" method="POST">
                                     @csrf
 
+                                    <input type="hidden" id="order_id" name="order_id" value="{{ $order->id }}">
                                     <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Service</label>
-                                            <select type="text" name="item_type" class="form-control" autofocus required>
+                                            <select type="text" name="laundry_service_id" class="form-control" autofocus required>
                                                 @foreach ($laundry_service as $item)
                                                     <option value="{{ $item->id }}">{{ $item->service->name }}</option>
                                                 @endforeach
@@ -62,7 +63,7 @@
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Item</label>
-                                            <select type="text" name="item_type" class="form-control" autofocus required>
+                                            <select type="text" name="laundry_item_id" class="form-control" autofocus required>
                                                 @foreach ($laundry_item as $item)
                                                     <option value="{{ $item->id }}">{{ $item->item_type->name }}
                                                     </option>
@@ -82,7 +83,8 @@
                                             <a href="{{ route('item.order.detail', ['id'=>$toko->id,'order_number'=>$order->order_number]) }}" class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
-                                            <button class="btn btn-primary btn-block px-5">Continue</button>
+                                            {{-- <a class="btn btn-secondary btn-block px-5" href="{{ route('item.order.store') }}">Continue</a> --}}
+                                            <button type="submit" class="btn btn-primary btn-block px-5">Continue</button>
                                         </div>
                                     </div>
                                 </form>

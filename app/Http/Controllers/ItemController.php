@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\item_type;
 use App\Models\Toko;
 use App\Models\User;
 use App\Models\laundry_categories;
@@ -11,7 +12,7 @@ use App\Models\laundry_item;
 use App\Models\laundry_service;
 use App\Models\order;
 use App\Models\order_list;
-
+use App\Models\service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,9 +113,15 @@ class ItemController extends Controller
             $order_list = order_list::where('order_id', $order_id)->get();
         } else {
             $order = order::where('order_number', $order_number)->first();
-            $order_id = order::where('order_number', $order_number)->first();
-            $order_list = order_list::where('order_id', $order_id)->get();
+
+            $order_list = order_list::where('order_id', $order->id)->get();
         }
+
+        $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
+        $laundry_item = laundry_item::where('toko_id', $toko->id)->get();
+
+        $item_type = item_type::all();
+        $service = service::all();
         /* dd($order_number); */
         /* dd($order->order_number); */
         return view('pages.item.order.index', [
@@ -124,6 +131,10 @@ class ItemController extends Controller
             /* 'order_number' => $order_number, */
             'order' => $order,
             'order_list' => $order_list,
+            'laundry_service' => $laundry_service,
+            'laundry_item' => $laundry_item,
+            'item_type' => $item_type,
+            'service' => $service,
         ]);
     }
 
@@ -146,6 +157,7 @@ class ItemController extends Controller
 
     public function orderadd($order_number)
     {
+        /* dd($order_number); */
         $user = Auth::user();
         $order = order::where('order_number', $order_number)->first();
         $toko = Toko::findOrFail($order->toko_id);
@@ -164,14 +176,32 @@ class ItemController extends Controller
 
     public function orderstore(Request $request)
     {
-        $user = Auth::user();
-
-        $validateData['status'] = 'Pending';
-
-        return view('pages.item.order.add.index', [
-            'title' => "Item Order",
-            'user' => $user,
+        $validateData = $request->validate([
+            'order_id' => 'required',
+            'laundry_service_id' => 'required',
+            'laundry_item_id' => 'required',
+            'quantity' => 'required|numeric',
         ]);
+
+
+        $laundry_service = laundry_service::findOrFail($request->laundry_service_id);
+        $laundry_item = laundry_item::findOrFail($request->laundry_item_id);
+
+        $itemprice = $laundry_item->price * $request->quantity;
+        $serviceprice = $laundry_service->price;
+
+        $validateData['price'] = $itemprice + $serviceprice;
+
+        $order = order::findOrFail($request->order_id);
+        $toko = Toko::findOrFail($order->toko_id);
+
+        /* dd($validateData); */
+
+        $order_list = order_list::create($validateData);
+
+
+        return redirect()->route('item.order.detail' , [$toko->id, $order->order_number])
+            ->with('success', 'Successfully Added');
     }
 
 

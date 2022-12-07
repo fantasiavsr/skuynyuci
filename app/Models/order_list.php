@@ -11,18 +11,10 @@ class order_list extends Model
 
     protected $table = 'order_lists';
 
-    protected $fillable = [
-        'order_id',
-        'laundry_item_id',
-        'service_id',
-        'quantity',
-        'price',
-    ];
+    protected $guarded = [];
 
-
-    public function order()
-    {
-        return $this->belongsTo(order::class);
+    public function order(){
+        return $this->belongsTo(order::class, 'order_id');
     }
 
     public function laundry_item()
