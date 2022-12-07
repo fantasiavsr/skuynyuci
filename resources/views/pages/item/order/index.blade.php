@@ -44,9 +44,10 @@
                                 Item</a>
                         </div>
 
+                        {{-- Item List --}}
                         {{-- Still need fixing alignments --}}
                         {{-- Card --}}
-                        @if (isset($order_list))
+                        @if (isset($order_list) && $order_list->count() > 0)
                             @foreach ($order_list as $item)
                                 <div class="card mb-2" style="width: 100%">
                                     {{-- Card Body --}}
@@ -67,11 +68,11 @@
                                                         echo $item_type_name;
                                                     @endphp
                                                 </h6>
-                                                <h6>Rp. {{ $item->price }}</h6>
+                                                <h6>Rp. {{ number_format($item->price, 0, ',', '.') }}</h6>
                                             </div>
                                             <div class="">
                                                 <h6 class="font-weight-bold">Quantity</h6>
-                                                <h6>{{ $item->quantity }}</h6>
+                                                <h6>{{ number_format($item->quantity, 0, ',', '.') }}</h6>
                                             </div>
                                             <div class="">
                                                 <h6 class="font-weight-bold">Service</h6>
@@ -85,6 +86,18 @@
                                             </div>
                                             <div class="">
                                                 <a href="#" class="btn btn-outline-dark px-4">edit</a>
+                                            </div>
+                                            <div>
+                                                {{-- <a href="#" class="btn btn-outline-danger">
+                                                    <i class="fas fa-fw fa-trash"></i>
+                                                </a> --}}
+                                                <form action="{{ route('item.order.delete', ['id' => $item->id]) }}"
+                                                    method="POST" {{-- onclick="return confirm('Are you sure?')" --}}>
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-danger"><i
+                                                            class="fas fa-fw fa-trash"></i></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -151,18 +164,23 @@
                                     alt="">
                             </div>
                             <div>
-                                <h6 class="font-weight-bold">Total Items</h6>
-                                <h6>Rp. 50.000</h6>
+                                <h6>Total Items</h6>
+                                <h6 class="font-weight-bold">{{ number_format($order->total_item, 0, ',', '.') }}</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col">
-                        <h6 class="font-weight-bold">Cost</h6>
-                        <h6>Rp. 10.000</h6>
+                        <h6>Cost</h6>
+                        <h6 class="font-weight-bold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</h6>
                     </div>
                     <div class="col-sm-3">
-                        <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue"
-                            style="border-radius: 10px">Order</a>
+                        @if ($order->total_item == 0)
+                            <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue disabled"
+                                style="border-radius: 10px" disabled>Order</a>
+                        @else
+                            <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue"
+                                style="border-radius: 10px">Order</a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -115,6 +115,9 @@ class ItemController extends Controller
             $order = order::where('order_number', $order_number)->first();
 
             $order_list = order_list::where('order_id', $order->id)->get();
+
+            $order->total_item =   $order_list->sum('quantity');
+            $order->total_price =   $order_list->sum('price');
         }
 
         $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
@@ -122,6 +125,7 @@ class ItemController extends Controller
 
         $item_type = item_type::all();
         $service = service::all();
+
         /* dd($order_number); */
         /* dd($order->order_number); */
         return view('pages.item.order.index', [
@@ -204,7 +208,15 @@ class ItemController extends Controller
             ->with('success', 'Successfully Added');
     }
 
+    public function orderdelete($id){
+        $order_list = order_list::findOrFail($id);
+        $order = order::findOrFail($order_list->order_id);
+        $toko = Toko::findOrFail($order->toko_id);
+        $order_list->delete();
 
+        return redirect()->route('item.order.detail' , [$toko->id, $order->order_number])
+            ->with('success', 'Successfully Deleted');
+    }
 
 
 
