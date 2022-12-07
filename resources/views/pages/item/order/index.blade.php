@@ -36,7 +36,7 @@
                         {{-- Sub Title --}}
                         <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-4 mb-4">
                             <h1 class="h5 mb-0 text-gray-800 font-weight-bold">Order List</h1>
-                            <a href="{{ route('item.order.add', ['id' => $toko->id]) }}" class="h7 mb-0 ">Add Item</a>
+                            <a href="{{ route('item.order.add', ['order_number' => $order->order_number]) }}" class="h7 mb-0 ">Add Item</a>
                         </div>
 
                         {{-- Still need fixing alignments --}}

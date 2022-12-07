@@ -47,7 +47,7 @@ Route::get('item service/{id}', [ItemController::class, 'itemDetailService'])->m
 /* Order Item */
 /* Route::get('item order', [ItemController::class, 'ordertest'])->middleware('auth')->name('item.order.detailtest'); */
 Route::get('item order/{id}/{order_number}', [ItemController::class, 'order'])->middleware('auth')->name('item.order.detail');
-Route::get('Add Order/{id}', [ItemController::class, 'orderadd'])->middleware('auth')->name('item.order.add');
+Route::get('Add Order/{order_number}', [ItemController::class, 'orderadd'])->middleware('auth')->name('item.order.add');
 Route::post('Add Order', [ItemController::class, 'orderstore'])->name('item.order.store');
 
 

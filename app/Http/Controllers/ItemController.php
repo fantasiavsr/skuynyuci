@@ -28,8 +28,8 @@ class ItemController extends Controller
         $user = Auth::user();
         $data = Toko::all();
         $detail = User::select('*')
-                ->where('level', '=', 'Launderer')
-                ->get();
+            ->where('level', '=', 'Launderer')
+            ->get();
 
         return view('pages.item.index', [
             'title' => "Item Detail",
@@ -56,7 +56,7 @@ class ItemController extends Controller
         $toko_image = laundry_image::where('toko_id', $id)->first();
         $toko_category = laundry_categories::where('toko_id', $id)->get();
 
-        $order_number = 'NO' . date('YmdHis') . $user->id;
+        $order_number = '1';
         /* dd($toko_image); */
         return view('pages.item.detail.index', [
             'title' => "Item Detail",
@@ -99,18 +99,24 @@ class ItemController extends Controller
         $user = Auth::user();
         $toko = Toko::findOrFail($id);
         /* $order_number = $order_number; */
+        if ($order_number == 1) {
+            $validateData['order_number'] = 'NO' . rand(100000, 999999);
+            $validateData['user_id'] = $user->id;
+            $validateData['toko_id'] = $toko->id;
+            $validateData['total_item'] = 0;
+            $validateData['total_price'] = 0;
+            $validateData['status'] = 'Pending';
 
-        $validateData['order_number'] = $order_number;
-        $validateData['user_id'] = $user->id;
-        $validateData['toko_id'] = $toko->id;
-        $validateData['total_item'] = 0;
-        $validateData['total_price'] = 0;
-        $validateData['status'] = 'Pending';
-
-        $order = order::create($validateData);
-
-        $order_list = order_list::where('order_id', $order->id)->get();
-
+            $order = order::create($validateData);
+            $order_id = order::where('order_number', $order_number)->first();
+            $order_list = order_list::where('order_id', $order_id)->get();
+        } else {
+            $order = order::where('order_number', $order_number)->first();
+            $order_id = order::where('order_number', $order_number)->first();
+            $order_list = order_list::where('order_id', $order_id)->get();
+        }
+        /* dd($order_number); */
+        /* dd($order->order_number); */
         return view('pages.item.order.index', [
             'title' => "Item Order",
             'user' => $user,
@@ -138,19 +144,21 @@ class ItemController extends Controller
         ]);
     } */
 
-    public function orderadd($id)
+    public function orderadd($order_number)
     {
         $user = Auth::user();
-        $toko = Toko::findOrFail($id);
-        $laundry_service = laundry_service::where('toko_id', $id)->get();
-        $laundry_item = laundry_item::where('toko_id', $id)->get();
-
+        $order = order::where('order_number', $order_number)->first();
+        $toko = Toko::findOrFail($order->toko_id);
+        $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
+        $laundry_item = laundry_item::where('toko_id', $toko->id)->get();
+        /* dd($order_number); */
         return view('pages.item.order.add.index', [
             'title' => "Item Order",
             'user' => $user,
             'toko' => $toko,
             'laundry_service' => $laundry_service,
             'laundry_item' => $laundry_item,
+            'order' => $order,
         ]);
     }
 
@@ -173,7 +181,8 @@ class ItemController extends Controller
 
 
 
-    public function addForm($id) {
+    public function addForm($id)
+    {
         $user = Auth::user();
         $data = Toko::findOrFail($id);
         return view('pages.item.launderer.create', [
@@ -200,6 +209,4 @@ class ItemController extends Controller
             return back()->with('error', 'Something went wrong');
         }
     }
-
-
 }

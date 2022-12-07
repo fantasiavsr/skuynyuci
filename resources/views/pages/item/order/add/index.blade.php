@@ -79,7 +79,7 @@
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="#" class="btn btn-block px-5">Cancel</a>
+                                            <a href="{{ route('item.order.detail', ['id'=>$toko->id,'order_number'=>$order->order_number]) }}" class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-primary btn-block px-5">Continue</button>
