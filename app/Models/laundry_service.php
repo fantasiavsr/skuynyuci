@@ -18,4 +18,9 @@ class laundry_service extends Model
     public function service(){
         return $this->belongsTo(service::class);
     }
+
+    public function order_list()
+    {
+        return $this->hasMany(order_list::class);
+    }
 }

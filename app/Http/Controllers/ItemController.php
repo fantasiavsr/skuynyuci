@@ -7,6 +7,10 @@ use App\Models\Toko;
 use App\Models\User;
 use App\Models\laundry_categories;
 use App\Models\laundry_image;
+use App\Models\laundry_item;
+use App\Models\laundry_service;
+use App\Models\order;
+use App\Models\order_list;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +55,8 @@ class ItemController extends Controller
         $toko = Toko::findOrFail($id);
         $toko_image = laundry_image::where('toko_id', $id)->first();
         $toko_category = laundry_categories::where('toko_id', $id)->get();
+
+        $order_number = 'NO' . date('YmdHis') . $user->id;
         /* dd($toko_image); */
         return view('pages.item.detail.index', [
             'title' => "Item Detail",
@@ -58,6 +64,7 @@ class ItemController extends Controller
             'toko' => $toko,
             'toko_image' => $toko_image,
             'toko_category' => $toko_category,
+            'order_number' => $order_number,
         ]);
     }
 
@@ -81,27 +88,89 @@ class ItemController extends Controller
     public function ordertest()
     {
         $user = Auth::user();
-        return view('pages.item..order.indextest', [
+        return view('pages.item.order.indextest', [
             'title' => "Item Order",
             'user' => $user,
         ]);
     }
 
-    public function order($id)
+    public function order($id, $order_number)
     {
         $user = Auth::user();
         $toko = Toko::findOrFail($id);
-        $toko_image = laundry_image::where('toko_id', $id)->first();
-        $toko_category = laundry_categories::where('toko_id', $id)->get();
+        /* $order_number = $order_number; */
 
-        return view('pages.item..order.index', [
+        $validateData['order_number'] = $order_number;
+        $validateData['user_id'] = $user->id;
+        $validateData['toko_id'] = $toko->id;
+        $validateData['total_item'] = 0;
+        $validateData['total_price'] = 0;
+        $validateData['status'] = 'Pending';
+
+        $order = order::create($validateData);
+
+        $order_list = order_list::where('order_id', $order->id)->get();
+
+        return view('pages.item.order.index', [
             'title' => "Item Order",
             'user' => $user,
             'toko' => $toko,
-            'toko_image' => $toko_image,
-            'toko_category' => $toko_category,
+            /* 'order_number' => $order_number, */
+            'order' => $order,
+            'order_list' => $order_list,
         ]);
     }
+
+    /* public function ordernext($id)
+    {
+        $user = Auth::user();
+
+        $order = order::findOrFail($id);
+        $order_list = order_list::where('order_id', $order->id)->first();
+        $toko = Toko::findOrFail($order->toko_id);
+
+        return view('pages.item.order.indexnext', [
+            'title' => "Item Order",
+            'user' => $user,
+            'toko' => $toko,
+            'order' => $order,
+            'order_list' => $order_list,
+        ]);
+    } */
+
+    public function orderadd($id)
+    {
+        $user = Auth::user();
+        $toko = Toko::findOrFail($id);
+        $laundry_service = laundry_service::where('toko_id', $id)->get();
+        $laundry_item = laundry_item::where('toko_id', $id)->get();
+
+        return view('pages.item.order.add.index', [
+            'title' => "Item Order",
+            'user' => $user,
+            'toko' => $toko,
+            'laundry_service' => $laundry_service,
+            'laundry_item' => $laundry_item,
+        ]);
+    }
+
+    public function orderstore(Request $request)
+    {
+        $user = Auth::user();
+
+        $validateData['status'] = 'Pending';
+
+        return view('pages.item.order.add.index', [
+            'title' => "Item Order",
+            'user' => $user,
+        ]);
+    }
+
+
+
+
+
+
 
 
     public function addForm($id) {

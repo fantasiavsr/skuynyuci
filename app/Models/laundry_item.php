@@ -18,4 +18,9 @@ class laundry_item extends Model
     public function item_type(){
         return $this->belongsTo(item_type::class);
     }
+
+    public function order_list()
+    {
+        return $this->hasMany(order_list::class);
+    }
 }

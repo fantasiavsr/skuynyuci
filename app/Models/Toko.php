@@ -34,4 +34,8 @@ class Toko extends Model
     public function laundry_item(){
         return $this->hasMany(laundry_item::class);
     }
+
+    public function Order(){
+        return $this->hasMany(Order::class);
+    }
 }

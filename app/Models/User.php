@@ -47,4 +47,8 @@ class User extends Authenticatable
     public function Toko(){
         return $this->hasMany(Toko::class);
     }
+
+    public function Order(){
+        return $this->hasMany(Order::class);
+    }
 }
