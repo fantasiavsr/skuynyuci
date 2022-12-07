@@ -134,13 +134,14 @@
                                                     </div>
                                                     <div class="text-right">
                                                         <h4 style="color:black; font-weight: 600">
-                                                            ##
+                                                            Rp{{ number_format($laundry_item->where('toko_id', $item->id)->pluck('price')->first(),0,',','.') }}
                                                             <span style="font-size: 60%">
-                                                                /pcs</span></h4>
+                                                                /{{ $item_type->where('id',$laundry_item->where('toko_id', $item->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
+                                                        </h4>
                                                     </div>
                                                 </div>
 
-                                                <a href="{{ route('item.detail',  ['id' => $item->id]) }}"
+                                                <a href="{{ route('item.detail', ['id' => $item->id]) }}"
                                                     class="btn btn-block btn-primary px-4">Detail
                                                 </a>
                                             </div>
@@ -194,126 +195,52 @@
                                 <p style="color:#1947BA">see all</p>
                             </div>
                         </div>
+                        @foreach ($order as $item)
+                            {{-- History Card --}}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h5 style="font-weight: 800">{{ $item->toko->name }}</h5>
+                                                </div>
+                                                <div class="col text-right">
+                                                    <span class="badge badge-warning">
+                                                        {{ $item->status }}
+                                                    </span>
+                                                </div>
+                                            </div>
 
-                        {{-- History Card --}}
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 style="font-weight: 800">Fresh Laundry</h5>
-                                        <p>24 October, 2022/1:45AM </p>
-                                        <span class="badge"
-                                            style="font-weight:500; font-size:15px; border-color: #1947BA; border-style: solid; border-width: thin;">
-                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: #1947BA"></i>
-                                            <span style="color: black">Cleaning</span>
-                                        </span>
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-block btn-primary">
-                                                Detail
-                                            </button>
+                                            <p>{{ $item->created_at->format('d F, Y/H:iA') }}</p>
+                                            <span class="badge border border-primary" style="">
+                                                <div class="">
+                                                    <i class="fa fa-circle text-primary"></i>
+                                                    {{ $item->service_status }}
+                                                </div>
+                                            </span>
+                                            <div class="mt-4">
+                                                <a href="{{ route('item.order.detailv2', ['order_number' => $item->order_number]) }}" class="btn btn-sm btn-block btn-primary">
+                                                    Detail
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 style="font-weight: 800">Fresh Laundry</h5>
-                                        <p>24 October, 2022/1:45AM </p>
-                                        <span class="badge"
-                                            style="font-weight:500; font-size:15px; border-color: #1947BA; border-style: solid; border-width: thin;">
-                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: #1947BA"></i>
-                                            <span style="color: black">Cleaning</span>
-                                        </span>
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-block btn-primary">
-                                                Detail
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 style="font-weight: 800">Fresh Laundry</h5>
-                                        <p>24 October, 2022/1:45AM </p>
-                                        <span class="badge"
-                                            style="font-weight:500; font-size:15px; border-color: #1947BA; border-style: solid; border-width: thin;">
-                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: #1947BA"></i>
-                                            <span style="color: black">Cleaning</span>
-                                        </span>
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-block btn-primary">
-                                                Detail
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 style="font-weight: 800">Fresh Laundry</h5>
-                                        <p>24 October, 2022/1:45AM </p>
-                                        <span class="badge"
-                                            style="font-weight:500; font-size:15px; border-color: #1947BA; border-style: solid; border-width: thin;">
-                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: #1947BA"></i>
-                                            <span style="color: black">Cleaning</span>
-                                        </span>
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-block btn-primary">
-                                                Detail
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 style="font-weight: 800">Fresh Laundry</h5>
-                                        <p>24 October, 2022/1:45AM </p>
-                                        <span class="badge"
-                                            style="font-weight:500; font-size:15px; border-color: #1947BA; border-style: solid; border-width: thin;">
-                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: #1947BA"></i>
-                                            <span style="color: black">Cleaning</span>
-                                        </span>
-                                        <div class="mt-3">
-                                            <button class="btn btn-sm btn-block btn-primary">
-                                                Detail
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                 </div>
 
-            </div>
 
+            </div>
 
         </div>
 
-    </div>
+        <!-- Scroll to Top Button-->
+        @include('Partials.scrolltotop')
 
-    <!-- Scroll to Top Button-->
-    @include('Partials.scrolltotop')
-
-    <!-- Logout Modal-->
-    @include('Partials.logoutmodal')
-@endsection
+        <!-- Logout Modal-->
+        @include('Partials.logoutmodal')
+    @endsection

@@ -101,12 +101,13 @@ class ItemController extends Controller
         $toko = Toko::findOrFail($id);
         /* $order_number = $order_number; */
         if ($order_number == 1) {
-            $validateData['order_number'] = 'NO' . rand(100000, 999999);
+            $validateData['order_number'] = 'NO' . $toko->id . $user->id . rand(100000, 999999);
             $validateData['user_id'] = $user->id;
             $validateData['toko_id'] = $toko->id;
             $validateData['total_item'] = 0;
             $validateData['total_price'] = 0;
-            $validateData['status'] = 'Pending';
+            $validateData['status'] = 'Draft';
+            $validateData['order_type'] = 'Self service';
 
             $order = order::create($validateData);
             $order_id = order::where('order_number', $order_number)->first();
@@ -116,8 +117,12 @@ class ItemController extends Controller
 
             $order_list = order_list::where('order_id', $order->id)->get();
 
-            $order->total_item =   $order_list->sum('quantity');
-            $order->total_price =   $order_list->sum('price');
+            $order->total_item = $order_list->sum('quantity');
+            $order->total_price = $order_list->sum('price');
+
+            $validateData['total_item'] = $order->total_item;
+            $validateData['total_price'] = $order->total_price;
+            $order->update($validateData);
         }
 
         $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
@@ -204,23 +209,113 @@ class ItemController extends Controller
         $order_list = order_list::create($validateData);
 
 
-        return redirect()->route('item.order.detail' , [$toko->id, $order->order_number])
+        return redirect()->route('item.order.detail', [$toko->id, $order->order_number])
             ->with('success', 'Successfully Added');
     }
 
-    public function orderdelete($id){
+    public function orderdelete($id)
+    {
         $order_list = order_list::findOrFail($id);
         $order = order::findOrFail($order_list->order_id);
         $toko = Toko::findOrFail($order->toko_id);
         $order_list->delete();
 
-        return redirect()->route('item.order.detail' , [$toko->id, $order->order_number])
+        return redirect()->route('item.order.detail', [$toko->id, $order->order_number])
             ->with('success', 'Successfully Deleted');
     }
 
 
+    public function orderdelivery($order_number)
+    {
+        /* dd($order_number); */
+        $user = Auth::user();
+        $order = order::where('order_number', $order_number)->first();
+        $toko = Toko::findOrFail($order->toko_id);
 
+        /* dd($order_number); */
+        return view('pages.item.order.address.index', [
+            'title' => "Delivery Order",
+            'user' => $user,
+            'order' => $order,
+            'toko' => $toko,
+        ]);
+    }
 
+    public function orderdeliverystore(Request $request)
+    {
+
+        $order = order::findOrFail($request->order_id);
+        $toko = Toko::findOrFail($order->toko_id);
+
+        $order->address = $request->address;
+
+        $validateData['address'] = $order->address;
+
+        $order->update( $validateData);
+
+        return redirect()->route('item.order.detail', [$toko->id, $order->order_number])
+            ->with('success', 'Successfully Added');
+    }
+
+    public function checkout($order_number)
+    {
+        $user = Auth::user();
+        $order = order::where('order_number', $order_number)->first();
+        $toko = Toko::findOrFail($order->toko_id);
+        $order_list = order_list::where('order_id', $order->id)->get();
+
+        $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
+        $laundry_item = laundry_item::where('toko_id', $toko->id)->get();
+
+        return view('pages.item.order.checkout.index', [
+            'title' => "Item Order",
+            'user' => $user,
+            'toko' => $toko,
+            'order' => $order,
+            'order_list' => $order_list,
+            'laundry_service' => $laundry_service,
+            'laundry_item' => $laundry_item,
+        ]);
+    }
+
+    public function checkoutstore(Request $request)
+    {
+        $order = order::findOrFail($request->order_id);
+
+        $order->status = 'Waitting for Payment';
+        $order->order_type = $request->order_type;
+        $order->payment_method = $request->payment_method;
+
+        $validateData['status'] = $order->status;
+        $validateData['order_type'] = $order->order_type;
+        $validateData['payment_method'] = $order->payment_method;
+        /* dd($validateData); */
+        $order->update( $validateData);
+
+        return redirect()->route('item.order.detailv2', [$order->order_number])
+            ->with('success', 'Successfully Added');
+    }
+
+    public function orderdetail($order_number){
+        /* dd($order_number); */
+        $user = Auth::user();
+        $order = order::where('order_number', $order_number)->first();
+        $toko = Toko::findOrFail($order->toko_id);
+        $order_list = order_list::where('order_id', $order->id)->get();
+
+        $laundry_service = laundry_service::where('toko_id', $toko->id)->get();
+        $laundry_item = laundry_item::where('toko_id', $toko->id)->get();
+
+        return view('pages.item.order.detail.index', [
+            'title' => "Item Order",
+            'user' => $user,
+            'toko' => $toko,
+            'order' => $order,
+            'order_list' => $order_list,
+            'laundry_service' => $laundry_service,
+            'laundry_item' => $laundry_item,
+        ]);
+    }
 
 
     public function addForm($id)

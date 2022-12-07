@@ -22,9 +22,13 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                     <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">{{ $toko->name }} - Order <span
-                                class="badge text-light"
-                                style="font-weight:500; font-size:15px; background-color:#446DB5">{{ $order->order_number }}</span>
+                        <h1 class="font-weight-bold" style="color: black">{{ $toko->name }} - Order
+                            <span class="badge text-light"
+                                style="font-weight:500; font-size:15px; background-color:#446DB5">{{ $order->order_number }}
+                            </span>
+                            <span class="badge text-light"
+                                style="font-weight:500; font-size:15px; background-color:#979797">{{ $order->status }}
+                            </span>
                         </h1>
                     </div>
                 </div>
@@ -123,7 +127,7 @@
                         {{-- Sub Title --}}
                         <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-4 mb-4">
                             <h1 class="h5 mb-0 text-gray-800 font-weight-bold">Delivery Address</h1>
-                            <a href="#" class="h7 mb-0 ">Edit Address</a>
+                            <a href="{{ route('item.order.delivery', ['order_number' => $order->order_number]) }}" class="h7 mb-0 ">Edit Address</a>
                         </div>
 
                         {{-- Card --}}
@@ -138,7 +142,13 @@
                                     <h6>name</h6>
                                     <h6 class="font-weight-bold">{{ $user->name }}</h6>
                                     <h6>address</h6>
-                                    <h6 class="font-weight-bold">Jl. Raya Cibubur No. 1, Cibubur, Jakarta Timur</h6>
+                                    <h6 class="font-weight-bold">
+                                        @if ($order->address != null)
+                                            {{ $order->address }}
+                                        @else
+                                            <h6 class="text-danger">not filled yet</h6>
+                                        @endif
+                                    </h6>
                                     <h6>phone</h6>
                                     <h6 class="font-weight-bold">{{ $user->phone }}</h6>
                                 </div>
@@ -174,11 +184,11 @@
                         <h6 class="font-weight-bold">Rp{{ number_format($order->total_price, 0, ',', '.') }}</h6>
                     </div>
                     <div class="col-sm-3">
-                        @if ($order->total_item == 0)
+                        @if ($order->total_item == 0 || $order->address == null)
                             <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue disabled"
                                 style="border-radius: 10px" disabled>Order</a>
                         @else
-                            <a href="#" class="btn btn-lg btn-primary btn-block shadow-custom-blue"
+                            <a href="{{ route('item.order.checkout', ['order_number' => $order->order_number]) }}" class="btn btn-lg btn-primary btn-block shadow-custom-blue"
                                 style="border-radius: 10px">Order</a>
                         @endif
                     </div>

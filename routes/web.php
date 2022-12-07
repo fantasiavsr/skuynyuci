@@ -47,9 +47,24 @@ Route::get('item service/{id}', [ItemController::class, 'itemDetailService'])->m
 /* Order Item */
 /* Route::get('item order', [ItemController::class, 'ordertest'])->middleware('auth')->name('item.order.detailtest'); */
 Route::get('item order/{id}/{order_number}', [ItemController::class, 'order'])->middleware('auth')->name('item.order.detail');
+/* Order List */
 Route::get('add order/{order_number}', [ItemController::class, 'orderadd'])->middleware('auth')->name('item.order.add');
 Route::post('add order', [ItemController::class, 'orderstore'])->name('item.order.store');
 Route::delete('delete order/{id}', [ItemController::class, 'orderdelete'])->name('item.order.delete');
+/* Adress */
+Route::get('delivery order/{order_number}', [ItemController::class, 'orderdelivery'])->middleware('auth')->name('item.order.delivery');
+Route::post('edit delivery order', [ItemController::class, 'orderdeliverystore'])->name('item.order.delivery.store');
+
+/* Order Checkout */
+Route::get('item checkout/{order_number}', [ItemController::class, 'checkout'])->middleware('auth')->name('item.order.checkout');
+Route::post('item checkout store', [ItemController::class, 'checkoutstore'])->name('item.order.checkout.store');
+
+/* Order Detail */
+Route::get('item order detail/{order_number}', [ItemController::class, 'orderdetail'])->middleware('auth')->name('item.order.detailv2');
+
+
+
+
 
 
 
