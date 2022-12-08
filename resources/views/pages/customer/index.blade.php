@@ -76,17 +76,20 @@
                             <div class="card-body text-light">
                                 <div class="row">
                                     <div class="col">
-                                        <p style="font-weight: 200">Fresh Laundry</p>
+                                        <p style="font-weight: 200">Latest Active Order: <span style="">{{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number }}</span></p>
                                     </div>
                                 </div>
                                 <div class="row d-flex justify-content-between">
                                     <div class="col-xl-7 col-lg-5">
                                         <h3 style="font-weight: 500">
-                                            Your clothes will
-                                            finish in 1 Days
+                                            {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->name }}
                                         </h3>
+                                        <p class="" style="font-weight: 200;">{{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->created_at }}</p>
+                                        <h6>
+                                            {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->address }}
+                                        </h6>
                                         <button class="btn btn-sm btn-outline-light mt-4">
-                                            <a class="px-4" href="#"
+                                            <a class="px-4" href="{{ route('item.order.detailv2', ['order_number' => $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number]) }}"
                                                 style="text-decoration: none; color: white">view details</a>
                                         </button>
                                     </div>
@@ -211,9 +214,19 @@
                                                         <h5 style="font-weight: 800">{{ $item->toko->name }}</h5>
                                                     </div>
                                                     <div class="col text-right">
-                                                        <span class="badge badge-warning">
+                                                        @if ($item->status == 'Waitting for Payment')
+                                                            <span class="badge badge-danger">Waitting for
+                                                                Payment</span>
+                                                        @elseif ($item->status == 'Ongoing')
+                                                            <span class="badge badge-primary">Ongoing</span>
+                                                        @elseif ($item->status == 'Completed')
+                                                            <span class="badge badge-success">Completed</span>
+                                                        @elseif ($item->status == 'cancel')
+                                                            <span class="badge badge-warning">Pending</span>
+                                                        @endif
+                                                        {{-- <span class="badge badge-warning">
                                                             {{ $item->status }}
-                                                        </span>
+                                                        </span> --}}
                                                     </div>
                                                 </div>
 

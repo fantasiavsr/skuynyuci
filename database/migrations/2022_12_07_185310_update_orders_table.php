@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE orders MODIFY COLUMN `status` ENUM(\'Draft\', \'Waitting for Payment\', \'Pending\', \'Ongoing\', \'Comlpeted\') NOT NULL');
+        DB::statement('ALTER TABLE orders MODIFY COLUMN `status` ENUM(\'Draft\', \'Waitting for Payment\', \'Pending\', \'Ongoing\', \'Completed\') NOT NULL');
         Schema::table('orders', function (Blueprint $table) {
             $table->enum('order_type', ['Self service', 'Delivery service']);
             $table->string('address')->nullable();
