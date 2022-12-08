@@ -27,13 +27,14 @@
                     <div class="text-right">
                         <p style="line-height: 0px;">Location</p>
                         <h5 class="font-weight-bold" style="line-height: 30px; color:black"><i class="fa fa-map-marker"
-                                aria-hidden="true" style="color: #1947BA"></i>{{ $toko->address }}</h5>
+                                aria-hidden="true" style="color: #1947BA"></i> {{ $toko->address }}</h5>
                     </div>
                 </div>
 
                 <!-- Content -->
                 <div class="text-center mb-5">
-                    <img src="{{ asset('img/produk/'.$toko_image->image) }}" class="img-fluid mt-2 mb-5 shadow-custom-lg" alt="" style="width: 700px; border-radius: 25px">
+                    <img src="{{ asset('img/produk/' . $toko_image->image) }}" class="img-fluid mt-2 mb-5 shadow-custom-lg"
+                        alt="" style="width: 700px; border-radius: 25px">
                     <div class="d-flex justify-content-center" style="gap: 10px">
                         @foreach ($toko_category as $item)
                             <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">{{ $item->name }}</button>
@@ -53,14 +54,18 @@
                                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                                     <div class="col-md-9">
                                         <div class="">
-                                            <a href="{{ route('item.detail', ['id' => $toko->id]) }}" class="btn btn-light">About</a>
-                                            <a href="{{ route('item.detailservice', ['id' => $toko->id]) }}" class="btn btn-light active">Service</a>
+                                            <a href="{{ route('item.detail', ['id' => $toko->id]) }}"
+                                                class="btn btn-light">About</a>
+                                            <a href="{{ route('item.detailservice', ['id' => $toko->id]) }}"
+                                                class="btn btn-light active">Service</a>
                                             <a href="#" class="btn btn-light">Review</a>
                                         </div>
                                     </div>
                                     <div class="text-right">
                                         <a href="#" class="btn btn-lg btn-primary">
-                                            Order | 25.00/pcs
+                                            Rp{{ number_format($laundry_item->where('toko_id', $item->id)->pluck('price')->first(),0,',','.') }}
+                                            <span style="font-size: 60%">
+                                                /{{ $item_type->where('id',$laundry_item->where('toko_id', $item->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -69,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-md-9">
                                             <h5 class="font-weight-bold pt-3">
-                                               This is Service Page.
+                                                This is Service Page.
                                             </h5>
                                         </div>
                                     </div>

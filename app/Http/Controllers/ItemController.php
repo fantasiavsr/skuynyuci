@@ -56,6 +56,9 @@ class ItemController extends Controller
         $toko = Toko::findOrFail($id);
         $toko_image = laundry_image::where('toko_id', $id)->first();
         $toko_category = laundry_categories::where('toko_id', $id)->get();
+        $laundry_item  = laundry_item::where('toko_id', $id)->get();
+        $laundry_service = laundry_service::where('toko_id', $id)->get();
+        $item_type = item_type::all();
 
         $order_number = '1';
         /* dd($toko_image); */
@@ -66,6 +69,9 @@ class ItemController extends Controller
             'toko_image' => $toko_image,
             'toko_category' => $toko_category,
             'order_number' => $order_number,
+            'laundry_item' => $laundry_item,
+            'laundry_service' => $laundry_service,
+            'item_type' => $item_type,
         ]);
     }
 

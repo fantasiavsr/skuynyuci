@@ -186,6 +186,8 @@
                     {{-- Col --}}
                     <div class="col">
 
+                        {{-- History --}}
+
                         {{-- Title --}}
                         <div class="d-sm-flex justify-content-between mb-2">
                             <div>
@@ -195,40 +197,60 @@
                                 <p style="color:#1947BA">see all</p>
                             </div>
                         </div>
-                        @foreach ($order as $item)
-                            {{-- History Card --}}
+
+                        {{-- History Card --}}
+
+                        @if ($order->count() > 0)
+                            @foreach ($order as $item)
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 style="font-weight: 800">{{ $item->toko->name }}</h5>
+                                                    </div>
+                                                    <div class="col text-right">
+                                                        <span class="badge badge-warning">
+                                                            {{ $item->status }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <p>{{ $item->created_at->format('d F, Y/H:iA') }}</p>
+                                                <span class="badge border border-primary" style="">
+                                                    <div class="">
+                                                        <i class="fa fa-circle text-primary"></i>
+                                                        {{ $item->service_status }}
+                                                    </div>
+                                                </span>
+                                                <div class="mt-4">
+                                                    <a href="{{ route('item.order.detailv2', ['order_number' => $item->order_number]) }}"
+                                                        class="btn btn-sm btn-block btn-primary">
+                                                        Detail
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
                                             <div class="row">
                                                 <div class="col">
-                                                    <h5 style="font-weight: 800">{{ $item->toko->name }}</h5>
+                                                    <h5 style="font-weight: 800">No history available.</h5>
                                                 </div>
-                                                <div class="col text-right">
-                                                    <span class="badge badge-warning">
-                                                        {{ $item->status }}
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            <p>{{ $item->created_at->format('d F, Y/H:iA') }}</p>
-                                            <span class="badge border border-primary" style="">
-                                                <div class="">
-                                                    <i class="fa fa-circle text-primary"></i>
-                                                    {{ $item->service_status }}
-                                                </div>
-                                            </span>
-                                            <div class="mt-4">
-                                                <a href="{{ route('item.order.detailv2', ['order_number' => $item->order_number]) }}" class="btn btn-sm btn-block btn-primary">
-                                                    Detail
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endif
+
                     </div>
 
                 </div>
