@@ -28,8 +28,13 @@ class UserController extends Controller
         // $user_image = user_image::where('user_id', $user->id)->first();
         $level = Auth::user()->level;
         $laundry_item = laundry_item::all();
+        $laundry_service = laundry_service::all();
         $item_type = item_type::all();
         $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get();
+        $order_list = order_list::all();
+        $toko = Toko::all();
+
+        $myorder = order::where('status' ,'!=', 'Draft')->get();
 
         /* dd($level); */
         if ($level == "Admin") {
@@ -57,10 +62,17 @@ class UserController extends Controller
         } else if ($level == "Launderer") {
             return view('pages.launderer.launderer_index', compact('user'), [
                 'title' => "Dashboard",
-                'data' => Toko::select('*')
+                'toko' => Toko::select('*')
                             ->where('user_id', '=', auth()->user()->id)
                             ->get(),
                 'user' => $user,
+                'laundry_item' => $laundry_item,
+                'laundry_service' => $laundry_service,
+                'item_type' => $item_type,
+                'order' => $order,
+                'order_list' => $order_list,
+                'alltoko' => $toko,
+                'myorder' => $myorder,
             ]);
         } else {
             return back();

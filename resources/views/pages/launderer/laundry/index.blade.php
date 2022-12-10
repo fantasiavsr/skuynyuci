@@ -14,7 +14,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                     <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">Launderer Page</h1>
+                        <h1 class="font-weight-bold" style="color: black">{{ $toko->name }}</h1>
                     </div>
                 </div>
 
@@ -28,52 +28,7 @@
                             <img src="{{ asset('img/service_status/dummy.png') }}" class="img-fluid" alt="" style="">
                         </div> --}}
 
-                        {{-- Title --}}
                         <div class="d-sm-flex justify-content-between mt-4 mb-2">
-                            <div>
-                                <h3 class="h3 mb-0" style="font-weight: 700; color: black">My Laundry</h3>
-                            </div>
-                            {{-- <div class="text-right">
-                                <p style="color:#1947BA">see all</p>
-                            </div> --}}
-                        </div>
-
-                        {{-- Card --}}
-                        <div class="card mb-3" style="width: 100%">
-                            {{-- Card Body --}}
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Open</th>
-                                                <th>Close</th>
-                                                <th>Address</th>
-                                                <th>About</th>
-                                                <th>Detail</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($toko as $item)
-                                                <tr>
-                                                    <td>{{ $item->name }}</td>
-                                                    <td>{{ $item->open }}</td>
-                                                    <td>{{ $item->close }}</td>
-                                                    <td>{{ $item->address }}</td>
-                                                    <td>{{ $item->about }}</td>
-                                                    <td>
-                                                        <a href="{{ route('laundry.detail', ['id' => $item->id]) }}" class="btn">Detail</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- <div class="d-sm-flex justify-content-between mt-4 mb-2">
                             <div>
                                 <h3 class="h3 mb-0" style="font-weight: 700; color: black">My Order</h3>
                             </div>
@@ -98,7 +53,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($myorder->where('toko_id' , $alltoko->where('user_id', $user->id)->first()->id) as $item)
+                                            @foreach ($order as $item)
                                                 <tr>
                                                     <td>{{ $item->order_number }}</td>
                                                     <td>{{ $item->user->name }}</td>
@@ -109,7 +64,7 @@
                                                     <td>{{ $item->service_status }}</td>
                                                     <td>{{ $item->payment_method }}</td>
                                                     <td>
-                                                        <a href="#" class="btn">Edit</a>
+                                                        <a href="{{ route('laundry.order.edit', ['id' => $item->id]) }}" class="btn">Edit</a>
                                                     </td>
                                                     <td>
                                                         <a href="#" class="btn">Delete</a>
@@ -120,7 +75,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                     </div>
 

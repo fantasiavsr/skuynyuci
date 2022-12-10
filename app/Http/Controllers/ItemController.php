@@ -249,7 +249,6 @@ class ItemController extends Controller
 
     public function orderdeliverystore(Request $request)
     {
-
         $order = order::findOrFail($request->order_id);
         $toko = Toko::findOrFail($order->toko_id);
 

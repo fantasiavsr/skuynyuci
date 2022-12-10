@@ -21,11 +21,38 @@
                 {{-- Content Row --}}
                 <div class="row">
 
-                    {{-- Col  --}}
                     <div class="col">
 
                         <div class="text-center align-items-center my-5">
-                            <img src="{{ asset('img/service_status/dummy.png') }}" class="img-fluid" alt="" style="">
+                            {{-- {{ $order->service_status }} --}}
+                            {{-- {{ $order->status }} --}}
+                            @if ($order->status != 'Waitting for Payment')
+                                @if ($order->service_status == 'Not yet started')
+                                    <img src="{{ asset('img/service_status/getting_started.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Washing')
+                                    <img src="{{ asset('img/service_status/washing.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Drying')
+                                    <img src="{{ asset('img/service_status/drying.png') }}" class="img-fluid" alt=""
+                                        style="">
+                                @elseif ($order->service_status == 'Cleaning')
+                                    <img src="{{ asset('img/service_status/cleaning.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Ironing')
+                                    <img src="{{ asset('img/service_status/ironing.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Folding')
+                                    <img src="{{ asset('img/service_status/folding.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Deliver')
+                                    <img src="{{ asset('img/service_status/deliver.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @elseif ($order->service_status == 'Done')
+                                    <img src="{{ asset('img/service_status/completed.png') }}" class="img-fluid"
+                                        alt="" style="">
+                                @endif
+                            @endif
                         </div>
 
                         {{-- Card --}}
@@ -96,7 +123,8 @@
                                                         @foreach ($order->order_list as $item)
                                                             <tr>
                                                                 <td>{{ $item->laundry_item->item_type->name }}</td>
-                                                                <td>Rp. {{ number_format($item->price/$item->quantity) }}</td>
+                                                                <td>Rp. {{ number_format($item->price / $item->quantity) }}
+                                                                </td>
                                                                 <td>{{ $item->quantity }}</td>
                                                                 <td>Rp. {{ number_format($item->price) }}</td>
                                                             </tr>

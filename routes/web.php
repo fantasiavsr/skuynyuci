@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TokoController;
+use App\Http\Controllers\LaundererController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,18 @@ Route::post('item checkout store', [ItemController::class, 'checkoutstore'])->na
 
 /* Order Detail */
 Route::get('item order detail/{order_number}', [ItemController::class, 'orderdetail'])->middleware('auth')->name('item.order.detailv2');
+
+/* Launderer */
+Route::get('My Laundry/{id}', [LaundererController::class, 'laundrydetail'])->middleware('auth')->name('laundry.detail');
+
+/* Laundry Order */
+Route::get('Edit Order/{id}', [LaundererController::class, 'orderedit'])->middleware('auth')->name('laundry.order.edit');
+Route::post('edit order', [LaundererController::class, 'orderstore'])->name('laundry.order.store');
+
+
+
+
+
 
 
 
