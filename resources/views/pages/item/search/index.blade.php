@@ -38,16 +38,22 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Find the nearest laundry" aria-label="Search"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
+                                        <form action="{{ route('item.search') }}" method="POST">
+                                            @csrf
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                    placeholder="Find the nearest laundry" aria-label="Search"
+                                                    aria-describedby="basic-addon2" name="keyword">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                    {{-- <a href="{{ route('item.search') }}" class="btn btn-primary">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </a> --}}
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
