@@ -33,8 +33,15 @@
 
                 <!-- Content -->
                 <div class="text-center mb-5">
-                    <img src="{{ asset('img/produk/' . $toko_image->image) }}" class="img-fluid mt-2 mb-5 shadow-custom-lg"
-                        alt="" style="width: 700px; border-radius: 25px">
+                    @if (isset($toko_image))
+                        <img src="{{ asset('img/produk/' . $toko_image->image) }}"
+                            class="img-fluid mt-2 mb-5 shadow-custom-lg" alt=""
+                            style="width: 700px; border-radius: 25px">
+                    @else
+                        <img src="{{ asset('img/produk/laundry-photo.png') }}"
+                            class="img-fluid mt-2 mb-5 shadow-custom-lg" alt=""
+                            style="width: 700px; border-radius: 25px">
+                    @endif
                     <div class="d-flex justify-content-center" style="gap: 10px">
                         @foreach ($toko_category as $item)
                             <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">{{ $item->name }}</button>
@@ -64,22 +71,26 @@
                                     <div class="text-right">
                                         <div class="btn-group">
                                             <a href="{{ route('item.order.detail', ['id' => $toko->id, 'order_number' => $order_number]) }}"
-                                                class="btn btn-lg btn-primary text-right" style="border-radius: 10px 0px 0px 10px">
+                                                class="btn btn-lg btn-primary text-right"
+                                                style="border-radius: 10px 0px 0px 10px">
                                                 <span style="">
                                                     Rp{{ number_format($laundry_item->where('toko_id', $toko->id)->pluck('price')->first(),0,',','.') }}
                                                     <span style="font-size: 60%">
                                                         /{{ $item_type->where('id',$laundry_item->where('toko_id', $toko->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
                                                 </span>
                                             </a>
-                                            <button style="border-radius: 0px 10px 10px 0px" class="btn btn-primary dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button style="border-radius: 0px 10px 10px 0px"
+                                                class="btn btn-primary dropdown-toggle-split" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
                                                 <span class="text-right" style="font-size: 64%">
                                                     + service tax
                                                 </span>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 @foreach ($laundry_service as $item)
-                                                    <a class="dropdown-item" href="#" onclick="javascript:return false;">{{ $item->service->name }} / + Rp{{ number_format($item->price,0,',','.') }}</a>
-
+                                                    <a class="dropdown-item" href="#"
+                                                        onclick="javascript:return false;">{{ $item->service->name }} / +
+                                                        Rp{{ number_format($item->price, 0, ',', '.') }}</a>
                                                 @endforeach
 
                                             </div>

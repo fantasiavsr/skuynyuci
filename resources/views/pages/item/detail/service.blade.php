@@ -33,8 +33,14 @@
 
                 <!-- Content -->
                 <div class="text-center mb-5">
-                    <img src="{{ asset('img/produk/' . $toko_image->image) }}" class="img-fluid mt-2 mb-5 shadow-custom-lg"
-                        alt="" style="width: 700px; border-radius: 25px">
+                    @if (isset($toko_image))
+                        <img src="{{ asset('img/produk/' . $toko_image->image) }}"
+                            class="img-fluid mt-2 mb-5 shadow-custom-lg" alt=""
+                            style="width: 700px; border-radius: 25px">
+                    @else
+                        <img src="{{ asset('img/produk/laundry-photo.png') }}" class="img-fluid mt-2 mb-5 shadow-custom-lg"
+                            alt="" style="width: 700px; border-radius: 25px">
+                    @endif
                     <div class="d-flex justify-content-center" style="gap: 10px">
                         @foreach ($toko_category as $item)
                             <button class="btn rounded-pill btn-outline-primary px-4 me-sm-3">{{ $item->name }}</button>
@@ -55,42 +61,97 @@
                                     <div class="col-md-9">
                                         <div class="">
                                             <a href="{{ route('item.detail', ['id' => $toko->id]) }}"
-                                                class="btn btn-light">About</a>
+                                                class="btn btn-light ">About</a>
                                             <a href="{{ route('item.detailservice', ['id' => $toko->id]) }}"
                                                 class="btn btn-light active">Service</a>
                                             <a href="#" class="btn btn-light">Review</a>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <a href="#" class="btn btn-lg btn-primary">
-                                            Rp{{ number_format($laundry_item->where('toko_id', $item->id)->pluck('price')->first(),0,',','.') }}
-                                            <span style="font-size: 60%">
-                                                /{{ $item_type->where('id',$laundry_item->where('toko_id', $item->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
-                                        </a>
+                                        <div class="btn-group">
+                                            <a href="{{ route('item.order.detail', ['id' => $toko->id, 'order_number' => $order_number]) }}"
+                                                class="btn btn-lg btn-primary text-right"
+                                                style="border-radius: 10px 0px 0px 10px">
+                                                <span style="">
+                                                    Rp{{ number_format($laundry_item->where('toko_id', $toko->id)->pluck('price')->first(),0,',','.') }}
+                                                    <span style="font-size: 60%">
+                                                        /{{ $item_type->where('id',$laundry_item->where('toko_id', $toko->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
+                                                </span>
+                                            </a>
+                                            <button style="border-radius: 0px 10px 10px 0px"
+                                                class="btn btn-primary dropdown-toggle-split" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <span class="text-right" style="font-size: 64%">
+                                                    + service tax
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                @foreach ($laundry_service as $item)
+                                                    <a class="dropdown-item" href="#"
+                                                        onclick="javascript:return false;">{{ $item->service->name }} / +
+                                                        Rp{{ number_format($item->price, 0, ',', '.') }}</a>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="px-3">
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <h5 class="font-weight-bold pt-3">
-                                                This is Service Page.
-                                            </h5>
+                                        <div class="col-md-9 pt-3 pb-2">
+                                            <h5>Service</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTable" width="100%"
+                                                    cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($laundry_service as $item)
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $item->service->name }}
+                                                                </td>
+                                                                <td>Rp. {{ number_format($item->price) }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="row">
-                                        <div class="col">
-                                            <p class="font-weight-bold">email</p>
-                                            <p>freshlaundry@mail.com</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="font-weight-bold">phone</p>
-                                            <p>+62 838-4545-3232</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="font-weight-bold">social media</p>
-                                            <p>@freshlaundry</p>
+                                        <div class="col-md-9 pt-3 pb-2">
+                                            <h5>Item</h5>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTable2" width="100%"
+                                                    cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($laundry_item as $item2)
+                                                            <tr>
+                                                                <td>{{ $loop->iteration }}</td>
+                                                                <td>{{ $item2->item_type->name }}
+                                                                </td>
+                                                                <td>Rp. {{ number_format($item2->price) }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
