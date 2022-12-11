@@ -30,27 +30,39 @@ class UserController extends Controller
         $laundry_item = laundry_item::all();
         $laundry_service = laundry_service::all();
         $item_type = item_type::all();
-        $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get();
+        $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get()->sortByDesc('created_at');
         $order_list = order_list::all();
         $toko = Toko::all();
+        $service = service::all();
 
         $myorder = order::where('status' ,'!=', 'Draft')->get();
 
         /* dd($level); */
         if ($level == "Admin") {
+            $orderall = order::all();
+            $userall = User::all();
             return view('pages.admin.admin_index', compact('user'), [
-                'title' => "Dashboard",
-                'data' => User::select('*')
+                'title' => "Home",
+                'customer' => User::select('*')
                             ->where('level', '=', 'Customer')
                             ->get(),
-                'dataLaunderer' => User::select('*')
+                'launderer' => User::select('*')
                                     ->where('level', '=', 'Launderer')
                                     ->get(),
                 'user' => $user,
+                'laundry_item' => $laundry_item,
+                'laundry_service' => $laundry_service,
+                'item_type' => $item_type,
+                'order' => $order,
+                'order_list' => $order_list,
+                'toko' => $toko,
+                'service' => $service,
+                'userall' => $userall,
+                'orderall' => $orderall,
             ]);
         } else if ($level == "Customer") {
             return view('pages.customer.index', compact('user'), [
-                'title' => "Dashboard",
+                'title' => "Home",
                 'toko' => Toko::all(),
                 'toko_image' => laundry_image::all(),
                 'toko_category' => laundry_categories::all(),
@@ -61,7 +73,7 @@ class UserController extends Controller
             ]);
         } else if ($level == "Launderer") {
             return view('pages.launderer.launderer_index', compact('user'), [
-                'title' => "Dashboard",
+                'title' => "Home",
                 'toko' => Toko::select('*')
                             ->where('user_id', '=', auth()->user()->id)
                             ->get(),

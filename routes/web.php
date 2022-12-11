@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\LaundererController;
+use App\Http\Controllers\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +46,6 @@ Route::resource('user', UserController::class)->middleware('auth');
 /* Route::get('item detail', [ItemController::class, 'ItemDetailTest'])->middleware('auth')->name('item.detailtest'); */
 Route::get('item detail/{id}', [ItemController::class, 'itemDetail'])->middleware('auth')->name('item.detail');
 Route::get('item service/{id}', [ItemController::class, 'itemDetailService'])->middleware('auth')->name('item.detailservice');
-
 /* Order Item */
 /* Route::get('item order', [ItemController::class, 'ordertest'])->middleware('auth')->name('item.order.detailtest'); */
 Route::get('item order/{id}/{order_number}', [ItemController::class, 'order'])->middleware('auth')->name('item.order.detail');
@@ -55,23 +56,29 @@ Route::delete('delete order/{id}', [ItemController::class, 'orderdelete'])->name
 /* Adress */
 Route::get('delivery order/{order_number}', [ItemController::class, 'orderdelivery'])->middleware('auth')->name('item.order.delivery');
 Route::post('edit delivery order', [ItemController::class, 'orderdeliverystore'])->name('item.order.delivery.store');
-
 /* Order Checkout */
 Route::get('item checkout/{order_number}', [ItemController::class, 'checkout'])->middleware('auth')->name('item.order.checkout');
 Route::post('item checkout store', [ItemController::class, 'checkoutstore'])->name('item.order.checkout.store');
-
 /* Order Detail */
 Route::get('item order detail/{order_number}', [ItemController::class, 'orderdetail'])->middleware('auth')->name('item.order.detailv2');
 
 /* Launderer */
 Route::get('My Laundry/{id}', [LaundererController::class, 'laundrydetail'])->middleware('auth')->name('laundry.detail');
-
 /* Laundry Order */
 Route::get('Edit Order/{id}', [LaundererController::class, 'orderedit'])->middleware('auth')->name('laundry.order.edit');
 Route::post('edit order', [LaundererController::class, 'orderstore'])->name('laundry.order.store');
 
-
-
+/* Admin */
+/* Order */
+Route::get('Admin Order', [AdminController::class, 'order'])->middleware('auth')->name('admin.order');
+Route::get('Edit Order/{id}', [AdminController::class, 'orderedit'])->middleware('auth')->name('admin.order.edit');
+Route::post('edit order', [AdminController::class, 'orderstore'])->name('admin.order.store');
+/* Payment */
+Route::get('Admin Payment', [AdminController::class, 'payment'])->middleware('auth')->name('admin.payment');
+Route::get('Edit Payment/{id}', [AdminController::class, 'paymentedit'])->middleware('auth')->name('admin.payment.edit');
+Route::post('edit payment', [AdminController::class, 'paymentstore'])->name('admin.payment.store');
+/* Laundry */
+Route::get('Admin Laundry', [AdminController::class, 'laundry'])->middleware('auth')->name('admin.laundry');
 
 
 
