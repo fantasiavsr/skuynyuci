@@ -75,72 +75,7 @@
                         {{-- Title --}}
                         <div class="d-sm-flex justify-content-between mt-4 mb-2">
                             <div>
-                                <h3 class="h3 mb-3" style="font-weight: 700; color: black">Nearest Laundry</h3>
-                            </div>
-                            {{-- <div class="text-right">
-                                <p style="color:#1947BA">see all</p>
-                            </div> --}}
-                        </div>
-
-                        {{-- Laundry Card --}}
-                        <div class="row row-cols-1 row-cols-md-3 g-3">
-
-                            @foreach ($nearesttoko->slice(0, 3) as $item)
-                                <div class="col mb-3">
-                                    <div class="card">
-                                        <div class="row g-0">
-                                            <div class="px-4 pt-2 shadow-custom-lg">
-                                                {{-- Butuh Fix Responsive Image biar ga streched --}}
-                                                <img class="img-fluid" alt="..."
-                                                    @if ($toko_image->where('toko_id', $item->id)->pluck('image')->first() != null) src="{{ asset('img/produk/' .$toko_image->where('toko_id', $item->id)->pluck('image')->first()) }}"
-                                                            @else
-                                                                src="{{ asset('img/produk/laundry-photo.png') }}" @endif
-                                                    style="border-radius: 10pt; height:188px ; width:500px">
-                                            </div>
-
-                                            <div class="card-body mx-2 my-2">
-                                                <h5 class="card-title" style="font-weight: 700; color: black">
-                                                    {{ $item->name }}</h5>
-                                                <div class="d-sm-flex justify-content-between">
-                                                    <div>
-                                                        <p style="color:black"><i class="fa fa-map-marker"
-                                                                aria-hidden="true" style="color: #1947BA"></i>
-                                                            {{ $item->distance }}m</p>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <h4 style="color:black; font-weight: 600">
-                                                            Rp{{ number_format($laundry_item->where('toko_id', $item->id)->pluck('price')->first(),0,',','.') }}
-                                                            <span style="font-size: 60%">
-                                                                /{{ $item_type->where('id',$laundry_item->where('toko_id', $item->id)->pluck('item_type_id')->first())->pluck('name')->first() }}</span>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-
-                                                <a href="{{ route('item.detail', ['id' => $item->id]) }}"
-                                                    class="btn btn-block btn-primary px-4">Detail
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    {{-- Col --}}
-                    <div class="col">
-
-                        {{-- Title --}}
-                        <div class="d-sm-flex justify-content-between mt-4 mb-2">
-                            <div>
-                                <h3 class="h3 mb-3" style="font-weight: 700; color: black">Popular Laundry</h3>
+                                <h3 class="h3 mb-3" style="font-weight: 700; color: black">Result</h3>
                             </div>
                             {{-- <div class="text-right">
                                 <p style="color:#1947BA">see all</p>
@@ -150,7 +85,7 @@
                         {{-- Laundry Card --}}
                         <div class="row row-cols-1 row-cols-md-1 g-3">
 
-                            @foreach ($populartoko as $item)
+                            @foreach ($resulttoko as $item)
                                 <div class="col mb-3">
                                     <div class="card">
                                         <div class="row g-0">
@@ -212,8 +147,6 @@
                     </div>
 
                 </div>
-
-
 
             </div>
 

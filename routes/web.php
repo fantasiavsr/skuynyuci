@@ -43,6 +43,8 @@ Route::resource('user', UserController::class)->middleware('auth');
 /* Item Client Area */
 
 Route::get('item', [ItemController::class, 'index'])->middleware('auth')->name('item.index');
+Route::post('search item', [ItemController::class, 'search'])->middleware('auth')->name('item.search');
+Route::get('result item/{keyword}', [ItemController::class, 'result'])->middleware('auth')->name('item.result');
 Route::get('item detail/{id}', [ItemController::class, 'itemDetail'])->middleware('auth')->name('item.detail');
 Route::get('item service/{id}', [ItemController::class, 'itemDetailService'])->middleware('auth')->name('item.detailservice');
 

@@ -22,15 +22,17 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        {{-- {{ date('H') }} --}}
-                        @if (date('H') >= '05' && date('H') <= '11')
+                        {{-- {{ date('Hi') }} --}}
+                        @if (date('Hi') >= '0500' && date('Hi') <= '1100')
                             <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '12' && date('H') <= '15')
+                        @elseif (date('Hi') >= '1200' && date('Hi') <= '1500')
                             <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '16' && date('H') <= '17')
+                        @elseif (date('Hi') >= '1600' && date('Hi') <= '1700')
                             <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '18' && date('H') <= '04')
+                        @elseif (date('Hi') >= '1800' /* && date('Hi') <= '0500' */)
                             <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
+                        @else
+                        <h1 class="font-weight-bold" style="color: black">Welcome Back {{ auth()->user()->name }}</h1>
                         @endif
                     </div>
                     <div class="text-right">
@@ -47,16 +49,22 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control bg-light border-0 small"
-                                                placeholder="Find the nearest laundry" aria-label="Search"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button">
-                                                    <i class="fas fa-search fa-sm"></i>
-                                                </button>
+                                        <form action="{{ route('item.search') }}" method="POST">
+                                            @csrf
+                                            <div class="input-group">
+                                                <input type="text" class="form-control bg-light border-0 small"
+                                                    placeholder="Find the nearest laundry" aria-label="Search"
+                                                    aria-describedby="basic-addon2" name="keyword">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </button>
+                                                    {{-- <a href="{{ route('item.search') }}" class="btn btn-primary">
+                                                        <i class="fas fa-search fa-sm"></i>
+                                                    </a> --}}
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -76,13 +84,13 @@
                             border-radius: 10px;">
                             <div class="card-body text-light">
                                 @if ($order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first() == null)
-
                                     <div class="d-flex justify-content-between">
                                         <div class="mt-1">
                                             No Active Order
                                         </div>
                                         <div>
-                                            <a href="{{ route('item.index') }}" class="btn btn-sm btn-outline-light ml-3">Order Now</a>
+                                            <a href="{{ route('item.index') }}"
+                                                class="btn btn-sm btn-outline-light ml-3">Order Now</a>
                                         </div>
                                     </div>
                                 @else
@@ -111,8 +119,8 @@
                                             </button>
                                         </div>
                                         <div class="col-xl-3 col-lg-9">
-                                            <img class="img-fluid" src="{{ asset('img/activity-icon.png') }}" alt=""
-                                                style="width: 90%">
+                                            <img class="img-fluid" src="{{ asset('img/activity-icon.png') }}"
+                                                alt="" style="width: 90%">
                                         </div>
                                     </div>
                                 @endif
@@ -153,7 +161,8 @@
                                                 <div class="d-sm-flex justify-content-between">
                                                     <div>
                                                         <p style="color:black"><i class="fa fa-map-marker"
-                                                                aria-hidden="true" style="color: #1947BA"></i> {{ $item->distance }}m</p>
+                                                                aria-hidden="true" style="color: #1947BA"></i>
+                                                            {{ $item->distance }}m</p>
                                                     </div>
                                                     <div class="text-right">
                                                         <h4 style="color:black; font-weight: 600">

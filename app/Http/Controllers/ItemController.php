@@ -30,17 +30,17 @@ class ItemController extends Controller
         $laundry_item = laundry_item::all();
         $item_type = item_type::all();
         $laundry_category = laundry_categories::all();
-        $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get()->sortByDesc('created_at');
+        $order = order::where('user_id', $user->id)->where('status', '!=', 'Draft')->get()->sortByDesc('created_at');
 
         $nearesttoko = Toko::select('*')
-                            ->where('active', '=', '1')
-                            ->orderBy('distance', 'ASC')
-                            ->get();
+            ->where('active', '=', '1')
+            ->orderBy('distance', 'ASC')
+            ->get();
 
         $populartoko = Toko::select('*')
-                            ->where('active', '=', '1')
-                            ->orderBy('order_count', 'DESC')
-                            ->get();
+            ->where('active', '=', '1')
+            ->orderBy('order_count', 'DESC')
+            ->get();
         return view('pages.item.index', compact('user'), [
             'title' => "Laundry",
             'toko' => Toko::all(),
@@ -53,6 +53,43 @@ class ItemController extends Controller
             'nearesttoko' => $nearesttoko,
             'laundry_category' => $laundry_category,
             'populartoko' => $populartoko,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        /* dd($request->keyword); */
+        return redirect()->route('item.result', ['keyword' => $request->keyword])
+            ->with('success', 'Successfully Added');
+    }
+
+    public function result($keyword)
+    {
+        $user = Auth::user();
+        $laundry_item = laundry_item::all();
+        $item_type = item_type::all();
+        $laundry_category = laundry_categories::all();
+        $order = order::where('user_id', $user->id)->where('status', '!=', 'Draft')->get()->sortByDesc('created_at');
+
+
+        $resulttoko = Toko::select('*')
+            ->where('active', '=', '1')
+            ->where('name', 'LIKE', '%' . $keyword . '%')
+            ->orderBy('distance', 'ASC')
+            ->get();
+
+        /* dd($resultoko); */
+        return view('pages.item.search.index', compact('user'), [
+            'title' => "Laundry",
+            'toko' => Toko::all(),
+            'toko_image' => laundry_image::all(),
+            'toko_category' => laundry_categories::all(),
+            'user' => $user,
+            'laundry_item' => $laundry_item,
+            'item_type' => $item_type,
+            'order' => $order,
+            'laundry_category' => $laundry_category,
+            'resulttoko' => $resulttoko,
         ]);
     }
 
@@ -283,7 +320,7 @@ class ItemController extends Controller
 
         $validateData['address'] = $order->address;
 
-        $order->update( $validateData);
+        $order->update($validateData);
 
         return redirect()->route('item.order.detail', [$toko->id, $order->order_number])
             ->with('success', 'Successfully Added');
@@ -326,13 +363,14 @@ class ItemController extends Controller
         $validateData['order_type'] = $order->order_type;
         $validateData['payment_method'] = $order->payment_method;
         /* dd($validateData); */
-        $order->update( $validateData);
+        $order->update($validateData);
 
         return redirect()->route('item.order.detailv2', [$order->order_number])
             ->with('success', 'Successfully Added');
     }
 
-    public function orderdetail($order_number){
+    public function orderdetail($order_number)
+    {
         /* dd($order_number); */
         $user = Auth::user();
         $order = order::where('order_number', $order_number)->first();
