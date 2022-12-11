@@ -117,7 +117,7 @@
                                                 <p class="font-weight-bold">Total Price</p>
                                             </div>
                                             <div class="col">
-                                                <p>Rp. {{ number_format($order->total_price) }}</p>
+                                                <p>Rp. {{ number_format($order->total_price,0,',','.') }}</p>
                                             </div>
                                         </div>
                                     </div>

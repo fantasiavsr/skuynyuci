@@ -63,20 +63,28 @@ Route::get('item order detail/{order_number}', [ItemController::class, 'orderdet
 
 
 /* Admin */
+/* Order */
 Route::get('Admin Order', [AdminController::class, 'adminorder'])->middleware('auth')->name('admin.order');
 Route::get('Admin Edit Order/{id}', [AdminController::class, 'adminorderedit'])->middleware('auth')->name('admin.order.edit');
 Route::post('admin edit order', [AdminController::class, 'adminorderstore'])->name('admin.order.store');
-
+/* Payment */
 Route::get('Admin Payment', [AdminController::class, 'adminpayment'])->middleware('auth')->name('admin.payment');
 Route::get('Admin Edit Payment/{id}', [AdminController::class, 'adminpaymentedit'])->middleware('auth')->name('admin.payment.edit');
 Route::post('admin edit payment', [AdminController::class, 'adminpaymentstore'])->name('admin.payment.store');
-
+/* Laundry */
 Route::get('Admin Laundry', [AdminController::class, 'adminlaundry'])->middleware('auth')->name('admin.laundry');
 
 
 /* Launderer */
+/* Laundry */
 Route::get('My Laundry/{id}', [LaundererController::class, 'laundrydetail'])->middleware('auth')->name('laundry.detail');
-
+Route::get('Add New Laundry', [LaundererController::class, 'addlaundry'])->middleware('auth')->name('laundry.add');
+Route::post('add laundry', [LaundererController::class, 'laundrystore'])->name('laundry.add.store');
+Route::get('Add Laundry Next/{id}', [LaundererController::class, 'addlaundrynext'])->middleware('auth')->name('laundry.add.next');
+/* Order */
 Route::get('Edit Order/{id}', [LaundererController::class, 'orderedit'])->middleware('auth')->name('laundry.order.edit');
 Route::post('edit order', [LaundererController::class, 'orderstore'])->name('laundry.order.store');
-
+/* service */
+Route::get('Add Service/{id}', [LaundererController::class, 'serviceadd'])->middleware('auth')->name('laundry.service.add');
+Route::post('add laundry', [LaundererController::class, 'servicestore'])->name('laundry.service.add.store');
+Route::delete('delete service/{id}', [LaundererController::class, 'servicedelete'])->name('laundry.service.delete');

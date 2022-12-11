@@ -22,7 +22,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
                     <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">Add Laundry</h1>
+                        <h1 class="font-weight-bold" style="color: black">Add Service</h1>
                     </div>
                 </div>
 
@@ -43,51 +43,27 @@
                         <div class="card mb-3" style="width: 100%">
                             {{-- Card Body --}}
                             <div class="card-body">
-                                <form action="{{ route('laundry.add.store') }}" method="POST">
+                                <form action="{{ route('laundry.service.add.store') }}" method="POST">
                                     @csrf
 
                                     <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
-
+                                    <input type="hidden" id="toko_id" name="toko_id" value="{{ $toko->id }}">
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">Laundry Name</label>
-                                            <input value="" placeholder="your laundry name.." type="text" name="name"
-                                                class="form-control" autofocus required>
+                                            <label class="form-label">Service</label>
+                                            <select type="text" name="service_id" class="form-control" autofocus required>
+                                                @foreach ($service as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">Open Hour</label>
-                                            <input value="" placeholder="ex: 07:00" type="text" name="open"
-                                                class="form-control" autofocus required>
-                                        </div>
-
-                                        <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">Close Hour</label>
-                                            <input value="" placeholder="ex: 18:00" type="text" name="close"
-                                                class="form-control" autofocus required>
-                                        </div>
-                                    </div>
-
-                                    <div class="row d-flex">
-                                        <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">Address</label>
-                                            <input value="" placeholder="your laundry adddress.." type="text" name="address"
-                                                class="form-control" autofocus required>
-                                        </div>
-                                        <div class="col-sm-2 form-outline mb-4">
-                                            <label class="form-label">Distance</label>
-                                            <input value="" placeholder="dummy distance.." type="text" name="distance"
-                                                class="form-control" autofocus required>
-                                        </div>
-                                    </div>
-
-                                    <div class="row d-flex">
-                                        <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">About</label>
-                                            <input value="" placeholder="laundry description" type="text" name="about"
+                                            <label class="form-label">Price</label>
+                                            <input value="" placeholder="ex: 5000" type="text" name="price"
                                                 class="form-control" autofocus required>
                                         </div>
                                     </div>
@@ -95,12 +71,12 @@
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{ route('user.index') }}"
+                                            <a href="{{ route('laundry.add.next', ['id' => $toko->id]) }}"
                                                 class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
                                             {{-- <a class="btn btn-secondary btn-block px-5" href="{{ route('item.order.store') }}">Continue</a> --}}
-                                            <button type="submit" class="btn btn-primary btn-block px-5">Next</button>
+                                            <button type="submit" class="btn btn-primary btn-block px-5">Add</button>
                                         </div>
                                     </div>
                                 </form>

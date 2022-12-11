@@ -33,9 +33,9 @@
                             <div>
                                 <h3 class="h3 mb-0" style="font-weight: 700; color: black">My Laundry</h3>
                             </div>
-                            {{-- <div class="text-right">
-                                <p style="color:#1947BA">see all</p>
-                            </div> --}}
+                            <div class="text-right mb-2">
+                                <a href="{{ route('laundry.add') }}" class="btn btn-primary">Add New Laundry</a>
+                            </div>
                         </div>
 
                         {{-- Card --}}

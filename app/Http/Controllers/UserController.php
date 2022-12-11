@@ -38,6 +38,7 @@ class UserController extends Controller
         $myorder = order::where('status' ,'!=', 'Draft')->get();
 
         $nearesttoko = Toko::select('*')
+                            ->where('active', '=', '1')
                             ->orderBy('distance', 'ASC')
                             ->get();
         /* dd($level); */

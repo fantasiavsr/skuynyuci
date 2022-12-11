@@ -33,10 +33,12 @@ class ItemController extends Controller
         $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get()->sortByDesc('created_at');
 
         $nearesttoko = Toko::select('*')
+                            ->where('active', '=', '1')
                             ->orderBy('distance', 'ASC')
                             ->get();
 
         $populartoko = Toko::select('*')
+                            ->where('active', '=', '1')
                             ->orderBy('order_count', 'DESC')
                             ->get();
         return view('pages.item.index', compact('user'), [
