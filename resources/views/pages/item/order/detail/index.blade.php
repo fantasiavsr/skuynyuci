@@ -104,6 +104,22 @@
                                                 <p>{{ $order->address }}</p>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <p class="font-weight-bold">Launderer</p>
+                                            </div>
+                                            <div class="col">
+                                                <p>{{ $order->toko->user->name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <p class="font-weight-bold">Total Price</p>
+                                            </div>
+                                            <div class="col">
+                                                <p>Rp. {{ number_format($order->total_price) }}</p>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div>
