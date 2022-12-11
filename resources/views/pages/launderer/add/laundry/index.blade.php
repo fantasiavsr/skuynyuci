@@ -43,7 +43,25 @@
                         <div class="card mb-3" style="width: 100%">
                             {{-- Card Body --}}
                             <div class="card-body">
-                                <form action="{{ route('laundry.add.store') }}" method="POST">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                @if ($message = Session::get('success'))
+                                    <div class="alert alert-success alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @endif
+
+
+                                <form action="{{ route('laundry.add.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
 
                                     <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
@@ -52,8 +70,8 @@
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Laundry Name</label>
-                                            <input value="" placeholder="your laundry name.." type="text" name="name"
-                                                class="form-control" autofocus required>
+                                            <input value="" placeholder="your laundry name.." type="text"
+                                                name="name" class="form-control" autofocus required>
                                         </div>
                                     </div>
 
@@ -74,29 +92,35 @@
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Address</label>
-                                            <input value="" placeholder="your laundry adddress.." type="text" name="address"
-                                                class="form-control" autofocus required>
+                                            <input value="" placeholder="your laundry adddress.." type="text"
+                                                name="address" class="form-control" autofocus required>
                                         </div>
                                         <div class="col-sm-2 form-outline mb-4">
                                             <label class="form-label">Distance</label>
-                                            <input value="" placeholder="dummy distance.." type="text" name="distance"
-                                                class="form-control" autofocus required>
+                                            <input value="" placeholder="dummy distance.." type="text"
+                                                name="distance" class="form-control" autofocus required>
                                         </div>
                                     </div>
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">About</label>
-                                            <input value="" placeholder="laundry description" type="text" name="about"
-                                                class="form-control" autofocus required>
+                                            <input value="" placeholder="laundry description" type="text"
+                                                name="about" class="form-control" autofocus required>
+                                        </div>
+                                    </div>
+
+                                    <label class="form-label">Laundry Photo: </label>
+                                    <div class="row d-flex">
+                                        <div class="col-sm form-outline mb-4">
+                                            <input type="file" name="image" class="form-input" autofocus>
                                         </div>
                                     </div>
 
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{ route('user.index') }}"
-                                                class="btn btn-block px-5">Cancel</a>
+                                            <a href="{{ route('user.index') }}" class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
                                             {{-- <a class="btn btn-secondary btn-block px-5" href="{{ route('item.order.store') }}">Continue</a> --}}

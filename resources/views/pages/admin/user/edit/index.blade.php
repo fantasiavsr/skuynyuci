@@ -58,7 +58,7 @@
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Username</label>
-                                            <input value="{{ $thisuser->name }}" type="text" name="username"
+                                            <input value="{{ $thisuser->username }}" type="text" name="username"
                                                 class="form-control" autofocus>
                                         </div>
 

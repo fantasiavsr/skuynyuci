@@ -176,7 +176,24 @@ class LaundererController extends Controller
         $toko->active = 0;
         $toko->order_count = 0;
         /* dd($toko); */
+        /* dd($toko->id); */
         $toko->save();
+        if($request->image != null){
+            /* dd($request->image); */
+            $request->validate([
+                'image' => 'image|max:20000',
+            ]);
+
+            $laundry_image = new laundry_image();
+            $laundry_image->toko_id = $toko->id;
+            /* dd($laundry_image); */
+            $fileName = $request->image->getClientOriginalName();
+            /* dd($fileName); */
+            $request->image->move(public_path('img/produk'), $fileName);
+
+            $laundry_image->image = $fileName;
+            $laundry_image->save();
+        }
 
         return redirect()->route('laundry.add.next', ['id' => $toko->id])
             ->with('success', 'Successfully Added');
@@ -187,7 +204,7 @@ class LaundererController extends Controller
         /* dd($toko); */
         $toko->active = 1;
         $toko->save();
-        return redirect()->route('laundry.order.edit', ['id' => $toko->id])
+        return redirect()->route('laundry.detail', ['id' => $toko->id])
             ->with('success', 'Successfully Added');
     }
 }
