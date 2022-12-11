@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
     //
-    public function laundry()
+    public function adminlaundry()
     {
         $user = Auth::user();
         $tokoall = Toko::all();
@@ -29,7 +29,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function order()
+    public function adminorder()
     {
         $orderall = order::all();
         $userall = User::all();
@@ -41,7 +41,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function orderedit($id)
+    public function adminorderedit($id)
     {
         $toko = Toko::find($id);
         $order = order::where('id', $id)->first();
@@ -58,7 +58,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function orderstore(Request $request){
+    public function adminorderstore(Request $request){
         $order = order::findOrFail($request->order_id);
         $order->status = $request->status;
         $order->save();
@@ -68,7 +68,7 @@ class AdminController extends Controller
             ->with('success', 'Successfully Added');
     }
 
-    public function payment()
+    public function adminpayment()
     {
         $orderall = order::all();
         $userall = User::all();
@@ -80,7 +80,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function paymentedit($id)
+    public function adminpaymentedit($id)
     {
         $toko = Toko::find($id);
         $order = order::where('id', $id)->first();
@@ -97,7 +97,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function paymentstore(Request $request)
+    public function adminpaymentstore(Request $request)
     {
         $order = order::findOrFail($request->order_id);
         $order->status = $request->status;

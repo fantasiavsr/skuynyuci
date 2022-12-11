@@ -96,7 +96,18 @@
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Status</label>
                                             <select type="text" name="status" class="form-control" autofocus>
-                                                <option value="">{{ $order->status }}</option>
+                                                <option value="Waitting for Payment"
+                                                    @if ($order->status == 'Waitting for Payment') selected @endif>Waitting for Payment
+                                                </option>
+                                                <option value="Ongoing" @if ($order->status == 'Ongoing') selected @endif>
+                                                    Ongoing
+                                                </option>
+                                                <option value="Pending" @if ($order->status == 'Pending') selected @endif>
+                                                    Pending
+                                                </option>
+                                                <option value="Completed" @if ($order->status == 'Completed') selected @endif>
+                                                    Completed
+                                                </option>
                                             </select>
                                         </div>
 
@@ -127,8 +138,7 @@
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{-- {{ route('laundry.detail', ['id' => $order->toko->id]) }} --}}"
-                                                class="btn btn-block px-5">Cancel</a>
+                                            <a href="{{-- {{ route('laundry.detail', ['id' => $order->toko->id]) }} --}}" class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
                                             {{-- <a class="btn btn-secondary btn-block px-5" href="{{ route('item.order.store') }}">Continue</a> --}}

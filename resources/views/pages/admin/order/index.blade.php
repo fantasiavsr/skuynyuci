@@ -11,13 +11,6 @@
             <!-- Begin Page Content -->
             <div class="container pt-3">
 
-                <!-- Page Heading -->
-                {{-- <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1">
-                    <div class="mb-3">
-                        <h1 class="font-weight-bold" style="color: black">Admin Page</h1>
-                    </div>
-                </div> --}}
-
                 {{-- Content Row --}}
                 <div class="row">
 
