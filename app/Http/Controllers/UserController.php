@@ -30,17 +30,17 @@ class UserController extends Controller
         $laundry_item = laundry_item::all();
         $laundry_service = laundry_service::all();
         $item_type = item_type::all();
-        $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get()->sortByDesc('created_at');
+        $order = order::where('user_id', $user->id)->where('status', '!=', 'Draft')->get()->sortByDesc('created_at');
         $order_list = order_list::all();
         $toko = Toko::all();
         $service = service::all();
 
-        $myorder = order::where('status' ,'!=', 'Draft')->get();
+        $myorder = order::where('status', '!=', 'Draft')->get();
 
         $nearesttoko = Toko::select('*')
-                            ->where('active', '=', '1')
-                            ->orderBy('distance', 'ASC')
-                            ->get();
+            ->where('active', '=', '1')
+            ->orderBy('distance', 'ASC')
+            ->get();
         /* dd($level); */
         if ($level == "Admin") {
             $orderall = order::all();
@@ -48,11 +48,11 @@ class UserController extends Controller
             return view('pages.admin.admin_index', compact('user'), [
                 'title' => "Home",
                 'customer' => User::select('*')
-                            ->where('level', '=', 'Customer')
-                            ->get(),
+                    ->where('level', '=', 'Customer')
+                    ->get(),
                 'launderer' => User::select('*')
-                                    ->where('level', '=', 'Launderer')
-                                    ->get(),
+                    ->where('level', '=', 'Launderer')
+                    ->get(),
                 'user' => $user,
                 'laundry_item' => $laundry_item,
                 'laundry_service' => $laundry_service,
@@ -81,8 +81,8 @@ class UserController extends Controller
             return view('pages.launderer.launderer_index', compact('user'), [
                 'title' => "Home",
                 'toko' => Toko::select('*')
-                            ->where('user_id', '=', auth()->user()->id)
-                            ->get(),
+                    ->where('user_id', '=', auth()->user()->id)
+                    ->get(),
                 'user' => $user,
                 'laundry_item' => $laundry_item,
                 'laundry_service' => $laundry_service,
@@ -95,6 +95,40 @@ class UserController extends Controller
         } else {
             return back();
         }
+    }
 
+    public function history()
+    {
+        /* dd(Auth::user()); */
+        $user = Auth::user();
+        // $user_image = user_image::where('user_id', $user->id)->first();
+        $level = Auth::user()->level;
+        $laundry_item = laundry_item::all();
+        $laundry_service = laundry_service::all();
+        $item_type = item_type::all();
+        $order = order::where('user_id', $user->id)->where('status', '!=', 'Draft')->get()->sortByDesc('created_at');
+        $order_list = order_list::all();
+        $toko = Toko::all();
+        $service = service::all();
+
+        $myorder = order::where('status', '!=', 'Draft')->get();
+
+        $nearesttoko = Toko::select('*')
+            ->where('active', '=', '1')
+            ->orderBy('distance', 'ASC')
+            ->get();
+
+        return view('pages.customer.history.index', compact('user'), [
+            'title' => "History",
+            'toko' => Toko::all(),
+            'toko_image' => laundry_image::all(),
+            'toko_category' => laundry_categories::all(),
+            'user' => $user,
+            'laundry_item' => $laundry_item,
+            'item_type' => $item_type,
+            'order' => $order,
+            'order_list' => $order_list,
+            'nearesttoko' => $nearesttoko,
+        ]);
     }
 }

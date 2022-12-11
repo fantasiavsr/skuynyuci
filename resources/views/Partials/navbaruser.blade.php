@@ -20,7 +20,7 @@
                     <a class="fw-bold nav-link {{ $title === 'Laundry' ? 'active' : '' }}" href="{{ route('item.index') }}">Laundry</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'History' ? 'active' : '' }}" href="#">History</a>
+                    <a class="fw-bold nav-link {{ $title === 'History' ? 'active' : '' }}" href="{{ route('user.history') }}">History</a>
                 </li>
             </ul>
 

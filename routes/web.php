@@ -41,7 +41,6 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::resource('user', UserController::class)->middleware('auth');
 
 /* Item Client Area */
-
 Route::get('item', [ItemController::class, 'index'])->middleware('auth')->name('item.index');
 Route::post('search item', [ItemController::class, 'search'])->middleware('auth')->name('item.search');
 Route::get('result item/{keyword}', [ItemController::class, 'result'])->middleware('auth')->name('item.result');
@@ -61,6 +60,8 @@ Route::get('item checkout/{order_number}', [ItemController::class, 'checkout'])-
 Route::post('item checkout store', [ItemController::class, 'checkoutstore'])->name('item.order.checkout.store');
 
 Route::get('item order detail/{order_number}', [ItemController::class, 'orderdetail'])->middleware('auth')->name('item.order.detailv2');
+
+Route::get('history/', [UserController::class, 'history'])->middleware('auth')->name('user.history');
 
 /* Admin */
 /* Order */

@@ -20,18 +20,7 @@
             <div class="container pt-3">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
-                    {{-- <div class="mb-3">
-                        @if (date('H') >= '05')
-                            <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '12')
-                            <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '16')
-                            <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '18')
-                            <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
-                        @endif
-                    </div> --}}
+                {{-- <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
                         <h1 class="font-weight-bold" style="color: black">Available Laundry</h1>
                     </div>
@@ -40,7 +29,7 @@
                         <h5 class="font-weight-bold" style="line-height: 30px; color:black"><i class="fa fa-map-marker"
                                 aria-hidden="true" style="color: #1947BA"></i> Malang, East Java</h5>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Search Row -->
                 <div class="row">
@@ -149,7 +138,10 @@
                 </div>
 
             </div>
-
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
         </div>
 
         <!-- Scroll to Top Button-->

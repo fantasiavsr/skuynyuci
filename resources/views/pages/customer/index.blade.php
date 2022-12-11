@@ -231,7 +231,6 @@
                         </div>
 
                         {{-- History Card --}}
-
                         @if ($order->count() > 0)
                             @foreach ($order as $item)
                                 <div class="card mb-3">
@@ -299,7 +298,7 @@
 
 
             </div>
-
+            <br><br><br>
         </div>
 
         <!-- Scroll to Top Button-->
