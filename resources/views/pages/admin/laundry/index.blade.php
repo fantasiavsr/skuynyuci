@@ -44,7 +44,9 @@
                                                 <th>Close</th>
                                                 <th>Address</th>
                                                 <th>About</th>
-                                                <th>Detail</th>
+                                                <th>Active</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -56,8 +58,19 @@
                                                     <td>{{ $item->close }}</td>
                                                     <td>{{ $item->address }}</td>
                                                     <td>{{ $item->about }}</td>
+                                                    <td>{{ $item->active }}</td>
                                                     <td>
-                                                        <a href="{{ route('laundry.detail', ['id' => $item->id]) }}" class="btn">Detail</a>
+                                                        <a href="{{ route('admin.laundry.edit', ['id' => $item->id]) }}" class="btn">Edit</a>
+                                                    </td>
+                                                    <td>
+                                                        <form
+                                                            action="{{ route('admin.laundry.delete', ['id' => $item->id]) }}"
+                                                            method="POST" onclick="return confirm('Are you sure?')">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-outline-danger"><i
+                                                                    class="fas fa-fw fa-trash"></i></button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

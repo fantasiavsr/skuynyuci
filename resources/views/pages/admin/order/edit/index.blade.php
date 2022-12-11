@@ -48,7 +48,6 @@
 
                                     <input type="hidden" id="order_id" name="order_id" value="{{ $order->id }}">
                                     <input type="hidden" id="user_id" name="user_id" value="{{ $order->user_id }}">
-                                    <input type="hidden" id="toko_id" name="toko_id" value="{{ $order->toko->id }}">
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
@@ -67,8 +66,13 @@
 
                                         <div class="col-sm form-outline mb-4">
                                             <label class="form-label">Laundry</label>
-                                            <input value="{{ $order->toko->name }}" type="text" name="toko"
-                                                class="form-control" autofocus>
+                                            <select type="text" name="toko_id" class="form-control" autofocus disabled>
+                                                @foreach ($tokoall as $item2)
+                                                    <option value="{{ $item2->id }}"
+                                                        @if ($order->toko_id == $item2->id) selected @endif>{{ $item2->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
 
@@ -138,7 +142,7 @@
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{-- {{ route('laundry.detail', ['id' => $order->toko->id]) }} --}}" class="btn btn-block px-5">Cancel</a>
+                                            <a href="{{ route('admin.order') }}" class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">
                                             {{-- <a class="btn btn-secondary btn-block px-5" href="{{ route('item.order.store') }}">Continue</a> --}}

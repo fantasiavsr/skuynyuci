@@ -90,8 +90,9 @@ class LaundererController extends Controller
         $user = Auth::user();
         $toko = Toko::find($id);
         $service = service::all();
+        $laundry_service = laundry_service::where('toko_id', $id)->get();
         /* dd($laundry_item); */
-        return view('pages.launderer.add.service.add', compact('toko', 'service', 'user'), [
+        return view('pages.launderer.add.service.add', compact('toko', 'service', 'user', 'laundry_service'), [
             'title' => "Dashboard",
             'user' => $user,
         ]);
@@ -128,6 +129,40 @@ class LaundererController extends Controller
             ->with('success', 'Successfully Added');
     }
 
+    public function itemadd($id){
+        $user = Auth::user();
+        $toko = Toko::find($id);
+        $item_type = item_type::all();
+        $laundry_item = laundry_item::where('toko_id', $id)->get();
+        /* dd($laundry_item); */
+        return view('pages.launderer.add.item.add', compact('toko', 'item_type', 'user', 'laundry_item'), [
+            'title' => "Dashboard",
+            'user' => $user,
+        ]);
+    }
+
+    public function itemstore(Request $request){
+        $laundry_item = new laundry_item();
+        $laundry_item->toko_id = $request->toko_id;
+        $laundry_item->item_type_id = $request->item_type_id;
+        $laundry_item->price = $request->price;
+
+        /* dd($laundry_item); */
+        $laundry_item->save();
+
+        return redirect()->route('laundry.add.next', ['id' => $request->toko_id])
+            ->with('success', 'Successfully Added');
+    }
+
+    public function itemdelete($id){
+        $laundry_item = laundry_item::findOrFail($id);
+        $toko = Toko::find($laundry_item->toko_id);
+
+        $laundry_item->delete();
+        return redirect()->route('laundry.add.next', ['id' => $toko->id])
+            ->with('success', 'Successfully Added');
+    }
+
     public function laundrystore(Request $request)
     {
         $toko = new Toko();
@@ -143,30 +178,16 @@ class LaundererController extends Controller
         /* dd($toko); */
         $toko->save();
 
-        /* $laundry_image = new laundry_image();
-        $laundry_image->toko_id = $toko->id;
-        $laundry_image->image = $request->image;
-        $laundry_image->save(); */
-
-        /* $laundry_categories = new laundry_categories();
-        $laundry_categories->toko_id = $toko->id;
-        $laundry_categories->category = $request->category;
-        $laundry_categories->save(); */
-
-        /* $laundry_item = new laundry_item();
-        $laundry_item->toko_id = $toko->id;
-        $laundry_item->item_type_id = $request->item_type_id;
-        $laundry_item->item_name = $request->item_name;
-        $laundry_item->price = $request->price;
-        $laundry_item->save(); */
-
-        /* $laundry_service = new laundry_service();
-        $laundry_service->toko_id = $toko->id;
-        $laundry_service->service_id = $request->service_id;
-        $laundry_service->price = $request->price;
-        $laundry_service->save(); */
-
         return redirect()->route('laundry.add.next', ['id' => $toko->id])
+            ->with('success', 'Successfully Added');
+    }
+
+    public function laundrycreate($id){
+        $toko = Toko::find($id);
+        /* dd($toko); */
+        $toko->active = 1;
+        $toko->save();
+        return redirect()->route('laundry.order.edit', ['id' => $toko->id])
             ->with('success', 'Successfully Added');
     }
 }

@@ -43,7 +43,7 @@
                         <div class="card mb-3" style="width: 100%">
                             {{-- Card Body --}}
                             <div class="card-body">
-                                <form action="{{ route('laundry.service.add.store') }}" method="POST">
+                                <form action="{{ route('laundry.item.add.store') }}" method="POST">
                                     @csrf
 
                                     <input type="hidden" id="user_id" name="user_id" value="{{ $user->id }}">
@@ -51,14 +51,13 @@
 
                                     <div class="row d-flex">
                                         <div class="col-sm form-outline mb-4">
-                                            <label class="form-label">Service</label>
-                                            <select type="text" name="service_id" class="form-control" autofocus
+                                            <label class="form-label">Item</label>
+                                            <select type="text" name="item_type_id" class="form-control" autofocus
                                                 required>
-                                                @foreach ($service as $item)
-                                                    @if ($laundry_service->where('service_id', $item->id)->count() == 0)
+                                                @foreach ($item_type as $item)
+                                                    @if ($laundry_item->where('item_type_id', $item->id)->count() == 0)
                                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                     @endif
-                                                    {{-- <option value="{{ $item->id }}">{{ $item->name }}</option> --}}
                                                 @endforeach
                                             </select>
                                         </div>

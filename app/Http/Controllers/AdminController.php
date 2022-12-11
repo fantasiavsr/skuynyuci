@@ -29,6 +29,39 @@ class AdminController extends Controller
         ]);
     }
 
+    public function admineditlaundry($id){
+        $toko = Toko::find($id);
+        $toko_image = laundry_image::where('toko_id', $id)->get();
+        $toko_category = laundry_categories::where('toko_id', $id)->get();
+        $laundry_item = laundry_item::where('toko_id', $id)->get();
+        $laundry_service = laundry_service::where('toko_id', $id)->get();
+        $service = service::all();
+        $item_type = item_type::all();
+        $user = Auth::user();
+        return view('pages.admin.laundry.edit.index', compact('toko', 'toko_image', 'toko_category', 'laundry_item', 'laundry_service', 'service', 'item_type', 'user'), [
+            'title' => "Edit Laundry",
+            'user' => $user,
+        ]);
+    }
+
+    public function admineditlaundrystore(Request $request){
+        /* dd($request->all()); */
+        $toko = Toko::findOrFail($request->id);
+        $toko->name = $request->name;
+        $toko->active = $request->active;
+        /* dd($toko); */
+        $toko->save();
+
+        return redirect()->route('admin.laundry')
+            ->with('success', 'Successfully Updated');
+    }
+
+    public function adminlaundrydelete($id){
+        $toko = Toko::find($id);
+        $toko->delete();
+        return redirect()->back();
+    }
+
     public function adminorder()
     {
         $orderall = order::all();
@@ -52,7 +85,8 @@ class AdminController extends Controller
         $laundry_service = laundry_service::where('toko_id', $id)->get();
         $item_type = item_type::all();
         $user = Auth::user();
-        return view('pages.admin.order.edit.index', compact('toko', 'order', 'order_list', 'toko_image', 'toko_category', 'laundry_item', 'laundry_service', 'item_type', 'user'), [
+        $tokoall = Toko::all();
+        return view('pages.admin.order.edit.index', compact('tokoall', 'toko', 'order', 'order_list', 'toko_image', 'toko_category', 'laundry_item', 'laundry_service', 'item_type', 'user'), [
             'title' => "Dashboard",
             'user' => $user,
         ]);
@@ -60,12 +94,21 @@ class AdminController extends Controller
 
     public function adminorderstore(Request $request){
         $order = order::findOrFail($request->order_id);
+        $order->toko_id = $request->toko_id;
+        $order->payment_method = $request->payment_method;
+        $order->service_status = $request->service_status;
         $order->status = $request->status;
         $order->save();
 
         /* return redirect()->back()->with('success', 'Order status updated'); */
         return redirect()->route('admin.order')
             ->with('success', 'Successfully Added');
+    }
+
+    public function adminorderdelete($id){
+        $order = order::find($id);
+        $order->delete();
+        return redirect()->back();
     }
 
     public function adminpayment()
@@ -106,5 +149,42 @@ class AdminController extends Controller
         /* return redirect()->back()->with('success', 'Order status updated'); */
         return redirect()->route('admin.payment')
             ->with('success', 'Successfully Added');
+    }
+
+    public function adminpaymentdelete($id){
+        $order = order::find($id);
+        $order->delete();
+        return redirect()->back();
+    }
+
+    public function adminuser(){
+        $user = Auth::user();
+        $userall = User::all();
+        return view('pages.admin.user.index', compact('user', 'userall'), [
+            'title' => "User",
+            'user' => $user,
+        ]);
+    }
+
+    public function adminedituser($id){
+        $user = Auth::user();
+        $thisuser = User::find($id);
+        return view('pages.admin.user.edit.index', compact('user', 'thisuser'), [
+            'title' => "Edit User",
+            'user' => $user,
+        ]);
+    }
+
+    public function adminedituserstore(Request $request){
+        $user = User::findOrFail($request->id);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->level = $request->level;
+        $user->save();
+
+        return redirect()->route('admin.user')
+            ->with('success', 'Successfully Updated');
     }
 }

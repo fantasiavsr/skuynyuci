@@ -58,7 +58,14 @@
                                                         <a href="{{ route('admin.order.edit', ['id' => $item->id]) }}" class="btn">Edit</a>
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn">Delete</a>
+                                                        <form
+                                                            action="{{ route('admin.order.delete', ['id' => $item->id]) }}"
+                                                            method="POST" onclick="return confirm('Are you sure?')">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-outline-danger"><i
+                                                                    class="fas fa-fw fa-trash"></i></button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

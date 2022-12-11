@@ -140,7 +140,7 @@
                                     <!-- Submit button -->
                                     <div class="row">
                                         <div class="col">
-                                            <a href="{{-- {{ route('laundry.detail', ['id' => $order->toko->id]) }} --}}"
+                                            <a href="{{ route('admin.payment') }}"
                                                 class="btn btn-block px-5">Cancel</a>
                                         </div>
                                         <div class="col">

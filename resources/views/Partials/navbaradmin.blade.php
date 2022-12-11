@@ -26,7 +26,7 @@
                     <a class="fw-bold nav-link {{ $title === 'Laundry' ? 'active' : '' }}" href="{{ route('admin.laundry') }}">Laundry</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'User' ? 'active' : '' }}" href="#">User</a>
+                    <a class="fw-bold nav-link {{ $title === 'User' ? 'active' : '' }}" href="{{ route('admin.user') }}">User</a>
                 </li>
             </ul>
 

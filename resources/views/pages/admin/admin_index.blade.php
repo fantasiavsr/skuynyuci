@@ -45,7 +45,6 @@
                                                 <th>Close</th>
                                                 <th>Address</th>
                                                 <th>About</th>
-                                                <th>Detail</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,9 +56,6 @@
                                                     <td>{{ $item->close }}</td>
                                                     <td>{{ $item->address }}</td>
                                                     <td>{{ $item->about }}</td>
-                                                    <td>
-                                                        <a href="{{ route('laundry.detail', ['id' => $item->id]) }}" class="btn">Detail</a>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -88,8 +84,6 @@
                                                 <th>Phone</th>
                                                 <th>Email</th>
                                                 <th>Level</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -101,12 +95,6 @@
                                                     <td>{{ $item->phone }}</td>
                                                     <td>{{ $item->level }}</td>
                                                     <td>{{ $item->email }}</td>
-                                                    <td>
-                                                        <a href="#" class="btn">Edit</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn">Delete</a>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -137,8 +125,6 @@
                                                 <th>Status</th>
                                                 <th>Payment</th>
                                                 <th>Date</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -152,12 +138,6 @@
                                                     <td>{{ $item->status }}</td>
                                                     <td>{{ $item->payment_method }}</td>
                                                     <td>{{ $item->created_at }}</td>
-                                                    <td>
-                                                        <a href="{{ route('admin.payment.edit', ['id' => $item->id]) }}" class="btn">Edit</a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="btn">Delete</a>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

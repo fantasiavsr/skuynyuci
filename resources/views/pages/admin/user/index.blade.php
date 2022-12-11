@@ -28,7 +28,7 @@
                         {{-- Title --}}
                         <div class="d-sm-flex justify-content-between mt-4 mb-2">
                             <div>
-                                <h3 class="h3 mb-0" style="font-weight: 700; color: black">Payment</h3>
+                                <h3 class="h3 mb-0" style="font-weight: 700; color: black">User</h3>
                             </div>
                         </div>
                         {{-- Card --}}
@@ -38,36 +38,32 @@
                                     <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Order Number</th>
-                                                <th>Customer</th>
-                                                <th>Laundry</th>
-                                                <th>Total Item</th>
-                                                <th>Total Price</th>
-                                                <th>Status</th>
-                                                <th>Payment</th>
-                                                <th>Date</th>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Username</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Level</th>
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($orderall->where('status', '!=', 'Draft') as $item)
+                                            @foreach ($userall as $item)
                                                 <tr>
-                                                    <td>{{ $item->order_number }}</td>
-                                                    <td>{{ $item->user->name }}</td>
-                                                    <td>{{ $item->toko->name }}</td>
-                                                    <td>{{ $item->total_item }}</td>
-                                                    <td>{{ $item->total_price }}</td>
-                                                    <td>{{ $item->status }}</td>
-                                                    <td>{{ $item->payment_method }}</td>
-                                                    <td>{{ $item->created_at }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ $item->username }}</td>
+                                                    <td>{{ $item->phone }}</td>
+                                                    <td>{{ $item->email }}</td>
+                                                    <td>{{ $item->level }}</td>\
                                                     <td>
-                                                        <a href="{{ route('admin.payment.edit', ['id' => $item->id]) }}"
+                                                        <a href="{{ route('admin.user.edit', ['id' => $item->id]) }}"
                                                             class="btn">Edit</a>
                                                     </td>
                                                     <td>
                                                         <form
-                                                            action="{{ route('admin.payment.delete', ['id' => $item->id]) }}"
+                                                            action="{{ route('admin.user.delete', ['id' => $item->id]) }}"
                                                             method="POST" onclick="return confirm('Are you sure?')">
                                                             @method('delete')
                                                             @csrf
