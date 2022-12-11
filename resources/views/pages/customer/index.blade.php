@@ -74,30 +74,48 @@
                             style="background-color: #1947BA; box-shadow: 0px 16px 40px rgba(25, 71, 186, 0.10);
                             border-radius: 10px;">
                             <div class="card-body text-light">
-                                <div class="row">
-                                    <div class="col">
-                                        <p style="font-weight: 200">Latest Active Order: <span style="">{{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number }}</span></p>
+                                @if ($order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first() == null)
+
+                                    <div class="d-flex justify-content-between">
+                                        <div class="mt-1">
+                                            No Active Order
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('item.index') }}" class="btn btn-sm btn-outline-light ml-3">Order Now</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row d-flex justify-content-between">
-                                    <div class="col-xl-7 col-lg-5">
-                                        <h3 style="font-weight: 500">
-                                            {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->name }}
-                                        </h3>
-                                        <p class="" style="font-weight: 200;">{{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->created_at }}</p>
-                                        <h6>
-                                            {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->address }}
-                                        </h6>
-                                        <button class="btn btn-sm btn-outline-light mt-4">
-                                            <a class="px-4" href="{{ route('item.order.detailv2', ['order_number' => $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number]) }}"
-                                                style="text-decoration: none; color: white">view details</a>
-                                        </button>
+                                @else
+                                    <div class="row">
+                                        <div class="col">
+                                            <p style="font-weight: 200">Latest Active Order: <span
+                                                    style="">{{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number }}</span>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col-xl-3 col-lg-9">
-                                        <img class="img-fluid" src="{{ asset('img/activity-icon.png') }}" alt=""
-                                            style="width: 90%">
+                                    <div class="row d-flex justify-content-between">
+                                        <div class="col-xl-7 col-lg-5">
+                                            <h3 style="font-weight: 500">
+                                                {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->name }}
+                                            </h3>
+                                            <p class="" style="font-weight: 200;">
+                                                {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->created_at }}
+                                            </p>
+                                            <h6>
+                                                {{ $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->toko->address }}
+                                            </h6>
+                                            <button class="btn btn-sm btn-outline-light mt-4">
+                                                <a class="px-4"
+                                                    href="{{ route('item.order.detailv2', ['order_number' => $order->where('user_id', auth()->user()->id)->where('status', 'Ongoing')->sortByDesc('created_at')->first()->order_number]) }}"
+                                                    style="text-decoration: none; color: white">view details</a>
+                                            </button>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-9">
+                                            <img class="img-fluid" src="{{ asset('img/activity-icon.png') }}" alt=""
+                                                style="width: 90%">
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+
                             </div>
                         </div>
 
@@ -107,14 +125,15 @@
                                 <h3 class="h3 mb-0" style="font-weight: 700; color: black">Nearest Laundry</h3>
                             </div>
                             <div class="text-right">
-                                <p style="color:#1947BA">see all</p>
+                                <a href="{{ route('item.index') }}" style="color:#1947BA">see all</a>
+                                {{-- <p style="color:#1947BA">see all</p> --}}
                             </div>
                         </div>
 
                         {{-- Laundry Card --}}
                         <div class="row row-cols-1 row-cols-md-2 g-3">
 
-                            @foreach ($toko as $item)
+                            @foreach ($nearesttoko as $item)
                                 <div class="col mb-3">
                                     <div class="card">
                                         <div class="row g-0">
@@ -124,7 +143,7 @@
                                                     @if ($toko_image->where('toko_id', $item->id)->pluck('image')->first() != null) src="{{ asset('img/produk/' .$toko_image->where('toko_id', $item->id)->pluck('image')->first()) }}"
                                                             @else
                                                                 src="{{ asset('img/produk/laundry-photo.png') }}" @endif
-                                                    style="border-radius: 10pt; height: 200px; width:100%">
+                                                    style="border-radius: 10pt; height:188px ; width:500px">
                                             </div>
 
                                             <div class="card-body mx-2 my-2">
@@ -133,7 +152,7 @@
                                                 <div class="d-sm-flex justify-content-between">
                                                     <div>
                                                         <p style="color:black"><i class="fa fa-map-marker"
-                                                                aria-hidden="true" style="color: #1947BA"></i> 157m</p>
+                                                                aria-hidden="true" style="color: #1947BA"></i> {{ $item->distance }}m</p>
                                                     </div>
                                                     <div class="text-right">
                                                         <h4 style="color:black; font-weight: 600">

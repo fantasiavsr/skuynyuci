@@ -17,10 +17,10 @@
                         href="{{ route('user.index') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Get Started' ? 'active' : '' }}" href="#">History</a>
+                    <a class="fw-bold nav-link {{ $title === 'Laundry' ? 'active' : '' }}" href="{{ route('item.index') }}">Laundry</a>
                 </li>
                 <li class="nav-item">
-                    <a class="fw-bold nav-link {{ $title === 'Support' ? 'active' : '' }}" href="#">My Profile</a>
+                    <a class="fw-bold nav-link {{ $title === 'History' ? 'active' : '' }}" href="#">History</a>
                 </li>
             </ul>
 
@@ -42,7 +42,7 @@
                     </a>
                     <a class="dropdown-item" href="#">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Pengaturan
+                        Setting
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

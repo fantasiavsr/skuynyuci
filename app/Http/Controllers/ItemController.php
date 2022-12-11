@@ -27,16 +27,30 @@ class ItemController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $data = Toko::all();
-        $detail = User::select('*')
-            ->where('level', '=', 'Launderer')
-            ->get();
+        $laundry_item = laundry_item::all();
+        $item_type = item_type::all();
+        $laundry_category = laundry_categories::all();
+        $order = order::where('user_id', $user->id)->where('status' ,'!=', 'Draft')->get()->sortByDesc('created_at');
 
-        return view('pages.item.index', [
-            'title' => "Item Detail",
-            'data' => $data,
+        $nearesttoko = Toko::select('*')
+                            ->orderBy('distance', 'ASC')
+                            ->get();
+
+        $populartoko = Toko::select('*')
+                            ->orderBy('order_count', 'DESC')
+                            ->get();
+        return view('pages.item.index', compact('user'), [
+            'title' => "Laundry",
+            'toko' => Toko::all(),
+            'toko_image' => laundry_image::all(),
+            'toko_category' => laundry_categories::all(),
             'user' => $user,
-            'detail' => $detail
+            'laundry_item' => $laundry_item,
+            'item_type' => $item_type,
+            'order' => $order,
+            'nearesttoko' => $nearesttoko,
+            'laundry_category' => $laundry_category,
+            'populartoko' => $populartoko,
         ]);
     }
 
@@ -286,6 +300,10 @@ class ItemController extends Controller
     public function checkoutstore(Request $request)
     {
         $order = order::findOrFail($request->order_id);
+        $toko = Toko::findOrFail($order->toko_id);
+
+        $toko->order_count = $toko->order_count + 1;
+        $toko->update();
 
         $order->status = 'Waitting for Payment';
         $order->order_type = $request->order_type;

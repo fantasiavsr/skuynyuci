@@ -37,6 +37,9 @@ class UserController extends Controller
 
         $myorder = order::where('status' ,'!=', 'Draft')->get();
 
+        $nearesttoko = Toko::select('*')
+                            ->orderBy('distance', 'ASC')
+                            ->get();
         /* dd($level); */
         if ($level == "Admin") {
             $orderall = order::all();
@@ -70,6 +73,8 @@ class UserController extends Controller
                 'laundry_item' => $laundry_item,
                 'item_type' => $item_type,
                 'order' => $order,
+                'order_list' => $order_list,
+                'nearesttoko' => $nearesttoko,
             ]);
         } else if ($level == "Launderer") {
             return view('pages.launderer.launderer_index', compact('user'), [
