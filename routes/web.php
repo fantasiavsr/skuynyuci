@@ -63,11 +63,6 @@ Route::post('item checkout store', [ItemController::class, 'checkoutstore'])->na
 /* Order Detail */
 Route::get('item order detail/{order_number}', [ItemController::class, 'orderdetail'])->middleware('auth')->name('item.order.detailv2');
 
-/* Launderer */
-Route::get('My Laundry/{id}', [LaundererController::class, 'laundrydetail'])->middleware('auth')->name('laundry.detail');
-/* Laundry Order */
-Route::get('Edit Order/{id}', [LaundererController::class, 'orderedit'])->middleware('auth')->name('laundry.order.edit');
-Route::post('edit order', [LaundererController::class, 'orderstore'])->name('laundry.order.store');
 
 /* Admin */
 /* Order */
@@ -82,9 +77,11 @@ Route::post('edit payment', [AdminController::class, 'paymentstore'])->name('adm
 Route::get('Admin Laundry', [AdminController::class, 'laundry'])->middleware('auth')->name('admin.laundry');
 
 
-
-
-
+/* Launderer */
+Route::get('My Laundry/{id}', [LaundererController::class, 'laundrydetail'])->middleware('auth')->name('laundry.detail');
+/* Order */
+Route::get('Edit Order/{id}', [LaundererController::class, 'orderedit'])->middleware('auth')->name('laundry.order.edit');
+Route::post('edit order', [LaundererController::class, 'orderstore'])->name('laundry.order.store');
 
 
 

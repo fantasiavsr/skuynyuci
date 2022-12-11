@@ -22,13 +22,14 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between pt-2 mt-1 mb-4">
                     <div class="mb-3">
-                        @if (date('H') >= '05')
+                        {{-- {{ date('H') }} --}}
+                        @if (date('H') >= '05' && date('H') <= '11')
                             <h1 class="font-weight-bold" style="color: black">Good Morning, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '12')
+                        @elseif (date('H') >= '12' && date('H') <= '15')
                             <h1 class="font-weight-bold" style="color: black">Good Afternoon, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '16')
+                        @elseif (date('H') >= '16' && date('H') <= '17')
                             <h1 class="font-weight-bold" style="color: black">Good Evening, {{ auth()->user()->name }}</h1>
-                        @elseif (date('H') >= '18')
+                        @elseif (date('H') >= '18' && date('H') <= '04')
                             <h1 class="font-weight-bold" style="color: black">Good Night, {{ auth()->user()->name }}</h1>
                         @endif
                     </div>
